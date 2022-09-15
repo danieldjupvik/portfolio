@@ -1,4 +1,4 @@
-# Portfolio 2 converted to ReactJS
+# Portfolio danieldjupvik.dev
 
 Link to live website [danieldjupvik.dev](https://danieldjupvik.dev)
 
