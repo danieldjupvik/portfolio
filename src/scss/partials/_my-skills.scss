@@ -7,7 +7,7 @@
   &--box {
     background-color: $light-grey;
     color: black;
-    padding: $global-spacing / 2 $global-spacing;
+    padding: calc($global-spacing / 2) $global-spacing;
     width: 145px;
     margin: $global-spacing;
     text-align: center;

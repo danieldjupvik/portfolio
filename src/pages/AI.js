@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AI = () => {
   document.title = 'Daniel AI | Your AI Usage Solution';
-  const history = useHistory();
+  const navigate = useNavigate();
   const [contactEmail, setContactEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const goBack = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   const handleSubmit = (e) => {

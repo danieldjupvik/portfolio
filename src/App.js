@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import AI from './pages/AI';
 import Home from './pages/Home';
@@ -9,12 +9,12 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/privacy' component={Privacy} />
-          <Route path='/moviewatcht' component={MovieWatcht} />
-          <Route path='/ai' component={AI} />
-        </Switch>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/privacy' element={<Privacy />} />
+          <Route path='/moviewatcht' element={<MovieWatcht />} />
+          <Route path='/ai' element={<AI />} />
+        </Routes>
       </Router>
     </div>
   );

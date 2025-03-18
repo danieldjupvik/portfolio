@@ -1,13 +1,13 @@
-import { Link, useHistory } from 'react-router-dom';
-import movieWatchtScreenshot from '../assets/img/movieWatcht-screenshot.PNG';
+import { Link, useNavigate } from 'react-router-dom';
 import downloadAppStore from '../assets/img/app-store.png';
 import downloadGooglePlay from '../assets/img/download-google-play-store-logo.png';
+import movieWatchtScreenshot from '../assets/img/movieWatcht-screenshot.PNG';
 
 const MovieWatcht = () => {
   document.title = 'Daniel | MovieWatcht';
-  const history = useHistory();
+  const navigate = useNavigate();
   const goBack = () => {
-    history.goBack();
+    navigate(-1);
   };
   return (
     <div className='container'>
@@ -86,7 +86,7 @@ const MovieWatcht = () => {
         </div>
       </div>
       <div style={{ textAlign: 'center', padding: '30px', color: 'white' }}>
-        <Link to='privacy'>Privacy Policy</Link>
+        <Link to='/privacy'>Privacy Policy</Link>
       </div>
     </div>
   );
