@@ -9,7 +9,7 @@ const AI = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const goBack = () => {
-    navigate(-1);
+    navigate('/');
   };
 
   const handleSubmit = (e) => {
@@ -413,8 +413,11 @@ const AI = () => {
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
           <p>
             For immediate assistance, email us at:{' '}
-            <a href='mailto:info@danielai.com' style={{ color: '#007bff' }}>
-              info@danielai.com
+            <a
+              href='mailto:sockets.might-9b@icloud.com'
+              style={{ color: '#007bff' }}
+            >
+              sockets.might-9b@icloud.com
             </a>
           </p>
         </div>
