@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AITermsOfService from '../components/AITermsOfService';
 
 const AI = () => {
   document.title = 'Daniel AI | Your AI Usage Solution';
@@ -279,38 +280,21 @@ const AI = () => {
         <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>
           Terms & Conditions
         </h2>
-        <div style={{ fontSize: '16px', lineHeight: '1.6' }}>
+        <AITermsOfService isExtended={false} />
+        <div style={{ textAlign: 'center', marginTop: '30px' }}>
           <p>
-            <strong>Service Description:</strong> We provide access to AI
-            capabilities through a cost-sharing model. We are not the AI service
-            provider but rather facilitate access to third-party AI services.
+            For the complete terms of service, please visit our{' '}
+            <Link to='/ai/terms-of-service' style={{ color: '#74f7d9' }}>
+              Terms of Service
+            </Link>{' '}
+            page.
           </p>
-          <p style={{ marginTop: '15px' }}>
-            <strong>Usage Terms:</strong> Users must adhere to the terms and
-            conditions of the underlying AI provider. Any misuse or violation of
-            those terms may result in termination of access.
-          </p>
-          <p style={{ marginTop: '15px' }}>
-            <strong>Billing:</strong> Users are billed monthly based on actual
-            usage. Invoices are generated at the end of each billing cycle, and
-            payment is due within 15 days.
-          </p>
-          <p style={{ marginTop: '15px' }}>
-            <strong>Cancellation:</strong> Users may cancel their service at any
-            time. Upon cancellation, access to AI capabilities will be
-            terminated, and a final invoice for any outstanding usage will be
-            issued.
-          </p>
-          <p style={{ marginTop: '15px' }}>
-            <strong>Liability:</strong> We are not responsible for the
-            performance or availability of the underlying AI services. We make
-            no warranties or guarantees regarding the accuracy, reliability, or
-            suitability of the AI outputs for any particular purpose.
-          </p>
-          <p style={{ marginTop: '15px' }}>
-            <strong>Data Privacy:</strong> We collect and process only the data
-            necessary to provide our services and for billing purposes. We do
-            not access or retain the content processed by the AI services.
+          <p style={{ marginTop: '10px' }}>
+            To learn about how we handle your data, view our{' '}
+            <Link to='/ai/privacy-policy' style={{ color: '#74f7d9' }}>
+              Privacy Policy
+            </Link>
+            .
           </p>
         </div>
       </div>
