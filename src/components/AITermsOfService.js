@@ -8,7 +8,7 @@ const AITermsOfService = ({ isExtended = false }) => {
   return (
     <div style={{ fontSize: '16px', lineHeight: '1.6' }}>
       <section style={{ marginBottom: '30px' }}>
-        <h3 style={{ marginBottom: '15px' }}>Service Description</h3>
+        <h3 style={{ marginBottom: '15px' }}>1. Service Description</h3>
         <p style={{ marginBottom: '15px' }}>
           We provide access to AI capabilities through a cost-sharing model. We
           are not the AI service provider but rather facilitate access to
@@ -25,7 +25,7 @@ const AITermsOfService = ({ isExtended = false }) => {
       </section>
 
       <section style={{ marginBottom: '30px' }}>
-        <h3 style={{ marginBottom: '15px' }}>Usage Terms</h3>
+        <h3 style={{ marginBottom: '15px' }}>2. Usage Terms</h3>
         <p style={{ marginBottom: '15px' }}>
           Users must adhere to the terms and conditions of the underlying AI
           provider. Any misuse or violation of those terms may result in
@@ -62,7 +62,45 @@ const AITermsOfService = ({ isExtended = false }) => {
       </section>
 
       <section style={{ marginBottom: '30px' }}>
-        <h3 style={{ marginBottom: '15px' }}>Billing</h3>
+        <h3 style={{ marginBottom: '15px' }}>3. User Conduct</h3>
+        <p style={{ marginBottom: '15px' }}>
+          When using our AI service, you agree NOT to:
+        </p>
+        <ul style={{ paddingLeft: '20px', marginBottom: '15px' }}>
+          <li style={{ marginBottom: '10px' }}>
+            Violate any applicable laws, regulations, or these Terms
+          </li>
+          <li style={{ marginBottom: '10px' }}>
+            Use the Service for any unlawful, harmful, threatening, abusive,
+            harassing, defamatory, or otherwise objectionable purpose
+          </li>
+          <li style={{ marginBottom: '10px' }}>
+            Attempt to gain unauthorized access to, interfere with, or disrupt
+            any servers or networks connected to our service
+          </li>
+          <li style={{ marginBottom: '10px' }}>
+            Transmit viruses, malware, or other malicious code that could harm
+            our service, users, or third parties
+          </li>
+          <li style={{ marginBottom: '10px' }}>
+            Collect or harvest any personal data about other users
+          </li>
+          <li style={{ marginBottom: '10px' }}>
+            Use our service to generate or share content that infringes on any
+            intellectual property or privacy rights of a third party
+          </li>
+        </ul>
+        {isExtended && (
+          <p style={{ marginBottom: '15px' }}>
+            Violation of these guidelines may result in the suspension or
+            termination of your access to our service, and in serious cases, may
+            subject you to legal liability.
+          </p>
+        )}
+      </section>
+
+      <section style={{ marginBottom: '30px' }}>
+        <h3 style={{ marginBottom: '15px' }}>4. Billing</h3>
         <p style={{ marginBottom: '15px' }}>
           Users are billed monthly based on actual usage. Invoices are generated
           at the end of each billing cycle, and payment is due within 15 days.
@@ -95,7 +133,7 @@ const AITermsOfService = ({ isExtended = false }) => {
       </section>
 
       <section style={{ marginBottom: '30px' }}>
-        <h3 style={{ marginBottom: '15px' }}>Cancellation</h3>
+        <h3 style={{ marginBottom: '15px' }}>5. Cancellation</h3>
         <p style={{ marginBottom: '15px' }}>
           Users may cancel their service at any time. Upon cancellation, access
           to AI capabilities will be terminated, and a final invoice for any
@@ -118,7 +156,7 @@ const AITermsOfService = ({ isExtended = false }) => {
       </section>
 
       <section style={{ marginBottom: '30px' }}>
-        <h3 style={{ marginBottom: '15px' }}>Liability</h3>
+        <h3 style={{ marginBottom: '15px' }}>6. Liability</h3>
         <p style={{ marginBottom: '15px' }}>
           We are not responsible for the performance or availability of the
           underlying AI services. We make no warranties or guarantees regarding
@@ -153,7 +191,7 @@ const AITermsOfService = ({ isExtended = false }) => {
       </section>
 
       <section style={{ marginBottom: isExtended ? '30px' : '0' }}>
-        <h3 style={{ marginBottom: '15px' }}>Data Privacy</h3>
+        <h3 style={{ marginBottom: '15px' }}>7. Data Privacy</h3>
         <p style={{ marginBottom: '15px' }}>
           We collect and process only the data necessary to provide our services
           and for billing purposes. We do not access or retain the content
@@ -179,7 +217,7 @@ const AITermsOfService = ({ isExtended = false }) => {
       {isExtended && (
         <>
           <section style={{ marginBottom: '30px' }}>
-            <h3 style={{ marginBottom: '15px' }}>Intellectual Property</h3>
+            <h3 style={{ marginBottom: '15px' }}>8. Intellectual Property</h3>
             <p style={{ marginBottom: '15px' }}>
               All intellectual property rights in the service and its content
               (excluding content provided by users) belong to us or our
@@ -194,7 +232,7 @@ const AITermsOfService = ({ isExtended = false }) => {
           </section>
 
           <section style={{ marginBottom: '30px' }}>
-            <h3 style={{ marginBottom: '15px' }}>Service Modifications</h3>
+            <h3 style={{ marginBottom: '15px' }}>9. Service Modifications</h3>
             <p style={{ marginBottom: '15px' }}>
               We reserve the right to modify, suspend, or discontinue our
               service, temporarily or permanently, at any time without notice.
@@ -204,7 +242,7 @@ const AITermsOfService = ({ isExtended = false }) => {
           </section>
 
           <section style={{ marginBottom: '30px' }}>
-            <h3 style={{ marginBottom: '15px' }}>Dispute Resolution</h3>
+            <h3 style={{ marginBottom: '15px' }}>10. Dispute Resolution</h3>
             <p style={{ marginBottom: '15px' }}>
               Any disputes arising out of or relating to these terms or your use
               of our service shall be resolved through binding arbitration in
@@ -214,7 +252,7 @@ const AITermsOfService = ({ isExtended = false }) => {
           </section>
 
           <section style={{ marginBottom: '30px' }}>
-            <h3 style={{ marginBottom: '15px' }}>Changes to Terms</h3>
+            <h3 style={{ marginBottom: '15px' }}>11. Changes to Terms</h3>
             <p style={{ marginBottom: '15px' }}>
               We may update these terms from time to time. We will notify you of
               any changes by posting the new terms on this page. Your continued
@@ -224,7 +262,7 @@ const AITermsOfService = ({ isExtended = false }) => {
           </section>
 
           <section style={{ marginBottom: '0' }}>
-            <h3 style={{ marginBottom: '15px' }}>Contact Information</h3>
+            <h3 style={{ marginBottom: '15px' }}>12. Contact Information</h3>
             <p style={{ marginBottom: '15px' }}>
               If you have any questions about these terms, please contact us at{' '}
               <a

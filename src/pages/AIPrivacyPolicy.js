@@ -46,7 +46,7 @@ const AIPrivacyPolicy = () => {
         </div>
 
         <section style={{ marginBottom: '40px' }}>
-          <h2 style={{ marginBottom: '20px' }}>Introduction</h2>
+          <h2 style={{ marginBottom: '20px' }}>1. Introduction</h2>
           <p
             style={{
               fontSize: '16px',
@@ -71,7 +71,7 @@ const AIPrivacyPolicy = () => {
         </section>
 
         <section style={{ marginBottom: '40px' }}>
-          <h2 style={{ marginBottom: '20px' }}>Information We Collect</h2>
+          <h2 style={{ marginBottom: '20px' }}>2. Information We Collect</h2>
           <p
             style={{
               fontSize: '16px',
@@ -119,7 +119,9 @@ const AIPrivacyPolicy = () => {
         </section>
 
         <section style={{ marginBottom: '40px' }}>
-          <h2 style={{ marginBottom: '20px' }}>How We Use Your Information</h2>
+          <h2 style={{ marginBottom: '20px' }}>
+            3. How We Use Your Information
+          </h2>
           <p
             style={{
               fontSize: '16px',
@@ -182,7 +184,9 @@ const AIPrivacyPolicy = () => {
         </section>
 
         <section style={{ marginBottom: '40px' }}>
-          <h2 style={{ marginBottom: '20px' }}>Data Storage and Protection</h2>
+          <h2 style={{ marginBottom: '20px' }}>
+            4. Data Storage and Protection
+          </h2>
           <p
             style={{
               fontSize: '16px',
@@ -207,7 +211,7 @@ const AIPrivacyPolicy = () => {
         </section>
 
         <section style={{ marginBottom: '40px' }}>
-          <h2 style={{ marginBottom: '20px' }}>Sharing Your Information</h2>
+          <h2 style={{ marginBottom: '20px' }}>5. Sharing Your Information</h2>
           <p
             style={{
               fontSize: '16px',
@@ -261,7 +265,7 @@ const AIPrivacyPolicy = () => {
         </section>
 
         <section style={{ marginBottom: '40px' }}>
-          <h2 style={{ marginBottom: '20px' }}>Your Rights and Choices</h2>
+          <h2 style={{ marginBottom: '20px' }}>6. Your Rights and Choices</h2>
           <p
             style={{
               fontSize: '16px',
@@ -329,7 +333,7 @@ const AIPrivacyPolicy = () => {
 
         <section style={{ marginBottom: '40px' }}>
           <h2 style={{ marginBottom: '20px' }}>
-            Changes to This Privacy Policy
+            7. Changes to This Privacy Policy
           </h2>
           <p
             style={{
@@ -355,7 +359,7 @@ const AIPrivacyPolicy = () => {
         </section>
 
         <section style={{ marginBottom: '40px' }}>
-          <h2 style={{ marginBottom: '20px' }}>Contact Us</h2>
+          <h2 style={{ marginBottom: '20px' }}>8. Contact Us</h2>
           <p
             style={{
               fontSize: '16px',
