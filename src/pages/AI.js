@@ -55,8 +55,8 @@ const AI = () => {
         </p>
         <button
           style={{
-            background: '#007bff',
-            color: 'white',
+            background: '#74f7d9',
+            color: '#1d1d1d',
             border: 'none',
             padding: '12px 25px',
             borderRadius: '5px',
@@ -95,13 +95,14 @@ const AI = () => {
                 minWidth: '50px',
                 width: '50px',
                 height: '50px',
-                backgroundColor: '#007bff',
+                backgroundColor: '#74f7d9',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '24px',
                 fontWeight: 'bold',
+                color: '#1d1d1d',
               }}
             >
               1
@@ -123,13 +124,14 @@ const AI = () => {
                 minWidth: '50px',
                 width: '50px',
                 height: '50px',
-                backgroundColor: '#007bff',
+                backgroundColor: '#74f7d9',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '24px',
                 fontWeight: 'bold',
+                color: '#1d1d1d',
               }}
             >
               2
@@ -151,13 +153,14 @@ const AI = () => {
                 minWidth: '50px',
                 width: '50px',
                 height: '50px',
-                backgroundColor: '#007bff',
+                backgroundColor: '#74f7d9',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '24px',
                 fontWeight: 'bold',
+                color: '#1d1d1d',
               }}
             >
               3
@@ -216,7 +219,7 @@ const AI = () => {
                   alignItems: 'center',
                 }}
               >
-                <span style={{ color: '#007bff', marginRight: '10px' }}>✓</span>{' '}
+                <span style={{ color: '#74f7d9', marginRight: '10px' }}>✓</span>{' '}
                 Usage is tracked throughout the month
               </li>
               <li
@@ -226,7 +229,7 @@ const AI = () => {
                   alignItems: 'center',
                 }}
               >
-                <span style={{ color: '#007bff', marginRight: '10px' }}>✓</span>{' '}
+                <span style={{ color: '#74f7d9', marginRight: '10px' }}>✓</span>{' '}
                 Monthly invoice generated based on actual usage
               </li>
               <li
@@ -236,7 +239,7 @@ const AI = () => {
                   alignItems: 'center',
                 }}
               >
-                <span style={{ color: '#007bff', marginRight: '10px' }}>✓</span>{' '}
+                <span style={{ color: '#74f7d9', marginRight: '10px' }}>✓</span>{' '}
                 Payment processed automatically
               </li>
               <li
@@ -246,7 +249,7 @@ const AI = () => {
                   alignItems: 'center',
                 }}
               >
-                <span style={{ color: '#007bff', marginRight: '10px' }}>✓</span>{' '}
+                <span style={{ color: '#74f7d9', marginRight: '10px' }}>✓</span>{' '}
                 Detailed usage reports provided
               </li>
               <li
@@ -256,7 +259,7 @@ const AI = () => {
                   alignItems: 'center',
                 }}
               >
-                <span style={{ color: '#007bff', marginRight: '10px' }}>✓</span>{' '}
+                <span style={{ color: '#74f7d9', marginRight: '10px' }}>✓</span>{' '}
                 Cancel anytime with no penalties
               </li>
             </ul>
@@ -396,8 +399,8 @@ const AI = () => {
             <button
               type='submit'
               style={{
-                background: '#007bff',
-                color: 'white',
+                background: '#74f7d9',
+                color: '#1d1d1d',
                 border: 'none',
                 padding: '12px 25px',
                 borderRadius: '5px',
@@ -415,7 +418,7 @@ const AI = () => {
             For immediate assistance, email us at:{' '}
             <a
               href='mailto:sockets.might-9b@icloud.com'
-              style={{ color: '#007bff' }}
+              style={{ color: '#74f7d9' }}
             >
               sockets.might-9b@icloud.com
             </a>
