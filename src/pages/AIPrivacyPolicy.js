@@ -1,8 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useScrollToTop from '../hooks/useScrollToTop';
 
 const AIPrivacyPolicy = () => {
   document.title = 'Daniel AI | Privacy Policy';
   const navigate = useNavigate();
+  const { BackToTopButton } = useScrollToTop();
 
   const goBack = () => {
     navigate('/ai');
@@ -373,6 +375,31 @@ const AIPrivacyPolicy = () => {
           </p>
         </section>
       </div>
+
+      <div
+        style={{
+          color: 'white',
+          maxWidth: '800px',
+          margin: '0 auto 40px',
+          padding: '0 20px',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <p>
+            <Link to='/ai' style={{ color: '#74f7d9' }}>
+              Back to Daniel AI
+            </Link>
+          </p>
+          <p>
+            <Link to='/ai/terms-of-service' style={{ color: '#74f7d9' }}>
+              View Terms of Service
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      <BackToTopButton />
 
       <div style={{ textAlign: 'center', padding: '50px 0', color: 'white' }}>
         <p>© {new Date().getFullYear()} Daniel AI. All rights reserved.</p>

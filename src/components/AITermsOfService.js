@@ -103,10 +103,10 @@ const AITermsOfService = ({ isExtended = false }) => {
         </p>
         {isExtended && (
           <p style={{ marginBottom: '15px' }}>
-            To cancel your service, please send an email to our support team at
+            To cancel your service, please send an email to our support team{' '}
             <a
               href='mailto:sockets.might-9b@icloud.com'
-              style={{ color: '#74f7d9', marginLeft: '5px' }}
+              style={{ color: '#74f7d9' }}
             >
               sockets.might-9b@icloud.com
             </a>
@@ -226,10 +226,10 @@ const AITermsOfService = ({ isExtended = false }) => {
           <section style={{ marginBottom: '0' }}>
             <h3 style={{ marginBottom: '15px' }}>Contact Information</h3>
             <p style={{ marginBottom: '15px' }}>
-              If you have any questions about these terms, please contact us at
+              If you have any questions about these terms, please contact us at{' '}
               <a
                 href='mailto:sockets.might-9b@icloud.com'
-                style={{ color: '#74f7d9', marginLeft: '5px' }}
+                style={{ color: '#74f7d9' }}
               >
                 sockets.might-9b@icloud.com
               </a>

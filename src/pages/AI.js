@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AITermsOfService from '../components/AITermsOfService';
+import useScrollToTop from '../hooks/useScrollToTop';
 
 const AI = () => {
   document.title = 'Daniel AI | Your AI Usage Solution';
@@ -8,6 +9,7 @@ const AI = () => {
   const [contactEmail, setContactEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const { BackToTopButton } = useScrollToTop();
 
   const goBack = () => {
     navigate('/');
@@ -41,6 +43,7 @@ const AI = () => {
       <div
         style={{
           color: 'white',
+          width: '100%',
           maxWidth: '800px',
           margin: '40px auto',
           textAlign: 'center',
@@ -79,6 +82,7 @@ const AI = () => {
       <div
         style={{
           color: 'white',
+          width: '100%',
           maxWidth: '800px',
           margin: '60px auto',
           padding: '20px',
@@ -181,6 +185,7 @@ const AI = () => {
       <div
         style={{
           color: 'white',
+          width: '100%',
           maxWidth: '800px',
           margin: '60px auto',
           padding: '20px',
@@ -272,6 +277,7 @@ const AI = () => {
       <div
         style={{
           color: 'white',
+          width: '100%',
           maxWidth: '800px',
           margin: '60px auto',
           padding: '20px',
@@ -304,6 +310,7 @@ const AI = () => {
         id='contact-section'
         style={{
           color: 'white',
+          width: '100%',
           maxWidth: '800px',
           margin: '60px auto',
           padding: '20px',
@@ -317,7 +324,7 @@ const AI = () => {
             style={{
               textAlign: 'center',
               padding: '30px',
-              background: 'rgba(0, 123, 255, 0.1)',
+              background: 'rgba(116, 247, 217, 0.1)',
               borderRadius: '10px',
             }}
           >
@@ -413,6 +420,8 @@ const AI = () => {
       <div style={{ textAlign: 'center', padding: '50px 0', color: 'white' }}>
         <p>© {new Date().getFullYear()} Daniel AI. All rights reserved.</p>
       </div>
+
+      <BackToTopButton />
     </div>
   );
 };
