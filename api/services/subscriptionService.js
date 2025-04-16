@@ -1,5 +1,5 @@
-import apiClient from '../utils/axiosConfig';
-import envConfig from '../utils/envConfig';
+const apiClient = require('../utils/axiosConfig');
+const envConfig = require('../utils/envConfig');
 
 const SUBSCRIPTION_API_URL =
   'https://lago.danieldjupvik.com/api/v1/subscriptions';
@@ -43,4 +43,4 @@ const getSubscriptions = async () => {
   }
 };
 
-export { getSubscriptions };
+module.exports = { getSubscriptions };

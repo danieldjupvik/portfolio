@@ -22,4 +22,4 @@ const validateEnv = () => {
 // Run validation
 validateEnv();
 
-export default envConfig;
+module.exports = envConfig;
