@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import AI from './pages/AI';
 import AIPrivacyPolicy from './pages/AIPrivacyPolicy';
 import AITermsOfServicePage from './pages/AITermsOfServicePage';
+import CustomerPortal from './pages/customer-portal';
 import Home from './pages/Home';
 import MovieWatcht from './pages/MovieWatcht';
 import Privacy from './pages/Privacy';
@@ -21,6 +22,7 @@ function App() {
             path='/ai/terms-of-service'
             element={<AITermsOfServicePage />}
           />
+          <Route path='/customer-portal' element={<CustomerPortal />} />
         </Routes>
       </Router>
     </div>
