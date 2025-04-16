@@ -1,17 +1,4 @@
 {
-  "version": 2,
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "@vercel/node@5.1.14"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/subscriptions",
-      "dest": "/api/subscriptions/index.js"
-    }
-  ],
-  "env": {
-    "LAGO_API_KEY": "@lago-api-key"
-  }
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/$1" }],
+  "buildCommand": "npm run build"
 }
