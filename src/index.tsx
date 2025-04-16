@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import './images'; // Import images to set CSS variables
 import './scss/style.scss';
 
 const rootElement = document.getElementById('root');
