@@ -1,14 +1,14 @@
-const { getSubscription } = require('../controllers/subscriptionController');
+const { authenticateCustomer } = require('../controllers/customerController');
 const { setCorsHeaders, handleApiError } = require('../utils/middleware');
 
 // Constants for CORS
-const ALLOWED_METHODS = 'GET,OPTIONS';
+const ALLOWED_METHODS = 'POST,OPTIONS';
 const TIMEOUT_DURATION_MS = 20000; // 20 seconds
 
 /**
- * API handler for customer subscriptions endpoint (Vercel serverless function)
+ * API handler for customer authentication endpoint (Vercel serverless function)
  */
-const handleCustomerSubscriptions = async (req, res) => {
+const handleCustomerAuth = async (req, res) => {
   // Set CORS headers
   setCorsHeaders(res, ALLOWED_METHODS);
 
@@ -17,8 +17,8 @@ const handleCustomerSubscriptions = async (req, res) => {
     return res.status(200).end();
   }
 
-  // Only allow GET requests
-  if (req.method !== 'GET') {
+  // Only allow POST requests
+  if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
@@ -34,11 +34,11 @@ const handleCustomerSubscriptions = async (req, res) => {
 
   try {
     // Use the controller logic but pass our own clearTimeout function
-    await getSubscription(req, res, () => clearTimeout(requestTimeout));
+    await authenticateCustomer(req, res, () => clearTimeout(requestTimeout));
   } catch (error) {
     clearTimeout(requestTimeout);
     handleApiError(res, error);
   }
 };
 
-module.exports = handleCustomerSubscriptions;
+module.exports = handleCustomerAuth;

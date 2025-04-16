@@ -1,8 +1,7 @@
 const { apiClient } = require('../utils/axiosConfig');
 const { envConfig } = require('../utils/envConfig');
 
-const SUBSCRIPTION_API_URL =
-  'https://lago.danieldjupvik.com/api/v1/subscriptions';
+const BASE_URL = 'https://lago.danieldjupvik.com/api/v1';
 
 // Error messages
 const ERROR_MESSAGES = {
@@ -15,21 +14,77 @@ const ERROR_MESSAGES = {
   auth: 'Authentication failed. Please check your API key.',
   forbidden:
     'Access denied. Your API key does not have permission to access this resource.',
-  notFound: 'Resource not found.',
-  generic: 'Failed to fetch subscriptions. Please try again later.',
+  notFound: 'No subscriptions found for this customer.',
+  generic: 'Failed to fetch subscription data. Please try again later.',
 };
 
 /**
- * Fetch all subscriptions from the external API
+ * Fetch a page of subscriptions
  */
-const getSubscriptions = async () => {
+const fetchSubscriptionsPage = async (page = 1) => {
+  const response = await apiClient.get(
+    `${BASE_URL}/subscriptions?page=${page}`
+  );
+  return response.data;
+};
+
+/**
+ * Fetch all subscriptions for a customer by their external_id
+ */
+const getCustomerSubscriptions = async (customerExternalId) => {
   if (!envConfig.LAGO_API_KEY) {
     throw new Error(ERROR_MESSAGES.missingApiKey);
   }
+
+  if (!customerExternalId) {
+    throw new Error('Customer external_id is required');
+  }
+
   try {
-    console.log('Fetching subscriptions from external API');
-    const response = await apiClient.get(SUBSCRIPTION_API_URL);
-    return response.data;
+    let allCustomerSubscriptions = [];
+    let currentPage = 1;
+    let hasNextPage = true;
+
+    while (hasNextPage) {
+      const response = await fetchSubscriptionsPage(currentPage);
+      const { subscriptions = [], meta } = response;
+
+      // Filter subscriptions for this customer
+      const customerSubscriptions = subscriptions.filter(
+        (sub) => sub.external_customer_id === customerExternalId
+      );
+
+      allCustomerSubscriptions = [
+        ...allCustomerSubscriptions,
+        ...customerSubscriptions,
+      ];
+
+      // Check if there's a next page
+      hasNextPage = meta?.next_page !== null;
+      currentPage = meta?.next_page || currentPage + 1;
+    }
+
+    // Find the single subscription for this customer
+    const subscription = allCustomerSubscriptions.find(
+      (sub) => sub.external_customer_id === customerExternalId
+    );
+
+    if (!subscription) {
+      throw new Error(ERROR_MESSAGES.notFound);
+    }
+
+    // Return single subscription with formatted fields
+    return {
+      subscription: {
+        ...subscription,
+        status: subscription.status || 'unknown',
+        plan_code: subscription.plan_code || '',
+        external_id: subscription.external_id || '',
+        external_customer_id: subscription.external_customer_id || '',
+        started_at:
+          subscription.started_at || subscription.subscription_at || null,
+      },
+    };
   } catch (error) {
     if (error.message && error.message.includes('timed out')) {
       console.error('Request to Lago API timed out');
@@ -56,8 +111,10 @@ const getSubscriptions = async () => {
       );
     }
     console.error('Error fetching subscriptions:', error.message || error);
-    throw new Error(ERROR_MESSAGES.generic);
+    throw error;
   }
 };
 
-module.exports.getSubscriptions = getSubscriptions;
+module.exports = {
+  getCustomerSubscriptions,
+};

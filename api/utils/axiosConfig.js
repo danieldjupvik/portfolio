@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const REQUEST_TIMEOUT_MS = 1000;
+const REQUEST_TIMEOUT_MS = 5000;
 const CONTENT_TYPE = 'application/json';
 const AUTH_HEADER = `Bearer ${process.env.LAGO_API_KEY || ''}`;
 
@@ -44,4 +44,6 @@ apiClient.interceptors.response.use(
   }
 );
 
-module.exports.apiClient = apiClient;
+module.exports = {
+  apiClient,
+};

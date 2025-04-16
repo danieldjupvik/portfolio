@@ -4,7 +4,11 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
+
+// Import route files
+const customerRoutes = require('./routes/customerRoutes');
+const subscriptionRoutes = require('./routes/subscriptionRoutes');
+const usageRoutes = require('./routes/usageRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4501;
@@ -21,35 +25,10 @@ const requestLogger = (req, res, next) => {
 };
 app.use(requestLogger);
 
-// Dynamically load all API routes
-const apiDirectory = path.join(__dirname);
-
-// Register serverless functions as Express routes
-const registerServerlessFunctions = (directory) => {
-  fs.readdirSync(directory, { withFileTypes: true }).forEach((dirent) => {
-    const fullPath = path.join(directory, dirent.name);
-
-    if (dirent.isDirectory()) {
-      registerServerlessFunctions(fullPath);
-      return;
-    }
-    if (dirent.name === 'index.js' && !fullPath.includes('server.js')) {
-      // Get relative path without /api
-      const routePath = directory.replace(apiDirectory, '').replace(/\\/g, '/');
-      // eslint-disable-next-line global-require
-      const handlerFunction = require(fullPath);
-
-      console.log(`Registering API route: /api${routePath}`);
-
-      // Register the route
-      app.all(`/api${routePath}`, (req, res) => {
-        handlerFunction(req, res);
-      });
-    }
-  });
-};
-
-registerServerlessFunctions(apiDirectory);
+// Register API routes
+app.use('/api/customers', customerRoutes);
+app.use('/api/subscriptions', subscriptionRoutes);
+app.use('/api/usage', usageRoutes);
 
 // Start the server
 app.listen(PORT, () => {
