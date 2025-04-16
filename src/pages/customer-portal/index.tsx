@@ -1,5 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+// Type definitions
+interface Subscription {
+  id?: string;
+  name?: string;
+  status?: string;
+  created_at?: string;
+  [key: string]: any; // For other potential properties
+}
+
+interface SubscriptionDetailProps {
+  $hasMargin?: boolean;
+}
+
+interface StatusBadgeProps {
+  $status?: string;
+}
 
 // Styled Components
 const Container = styled.div`
@@ -119,11 +136,11 @@ const SubscriptionDetails = styled.div`
   color: #6b7280;
 `;
 
-const SubscriptionDetail = styled.p`
+const SubscriptionDetail = styled.p<SubscriptionDetailProps>`
   margin-top: ${(props) => (props.$hasMargin ? '0.25rem' : '0')};
 `;
 
-const StatusBadge = styled.span`
+const StatusBadge = styled.span<StatusBadgeProps>`
   font-weight: 500;
   color: ${(props) => {
     if (props.$status === 'active') return '#059669';
@@ -177,11 +194,11 @@ const TechnicalDetailsContent = styled.pre`
 `;
 
 const CustomerPortal = () => {
-  const [subscriptions, setSubscriptions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [errorDetails, setErrorDetails] = useState(null);
-  const [rawResponse, setRawResponse] = useState(null);
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [errorDetails, setErrorDetails] = useState<string | null>(null);
+  const [rawResponse, setRawResponse] = useState<any>(null);
 
   useEffect(() => {
     const fetchSubscriptions = async () => {
@@ -205,11 +222,8 @@ const CustomerPortal = () => {
           setSubscriptions(data);
         } else if (data && typeof data === 'object') {
           // If data is an object with a subscriptions property
-          if (data.subscriptions && Array.isArray(data.subscriptions)) {
+          if (Array.isArray(data.subscriptions)) {
             setSubscriptions(data.subscriptions);
-          } else if (data.data && Array.isArray(data.data)) {
-            // If data is wrapped in a data property
-            setSubscriptions(data.data);
           } else {
             // If it's just an object, not an array, wrap it in an array
             setSubscriptions([data]);
@@ -222,7 +236,7 @@ const CustomerPortal = () => {
 
         setError(null);
         setErrorDetails(null);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Error fetching subscriptions:', err);
         setSubscriptions([]);
         setError(
@@ -331,7 +345,7 @@ const CustomerPortal = () => {
             <RetryButton
               onClick={handleRetry}
               aria-label='Retry loading subscriptions'
-              tabIndex='0'
+              tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && handleRetry()}
             >
               Retry

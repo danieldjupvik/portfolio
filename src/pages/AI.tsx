@@ -15,7 +15,7 @@ const AI = () => {
     navigate('/');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Here you would normally send the form data to your backend
     console.log('Contact form submitted:', { contactEmail, message });
@@ -68,11 +68,12 @@ const AI = () => {
             marginTop: '30px',
             cursor: 'pointer',
           }}
-          onClick={() =>
-            document
-              .getElementById('contact-section')
-              .scrollIntoView({ behavior: 'smooth' })
-          }
+          onClick={() => {
+            const contactSection = document.getElementById('contact-section');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
         >
           Get Started Today
         </button>
