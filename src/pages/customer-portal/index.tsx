@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 // Type definitions
@@ -199,12 +199,25 @@ const CustomerPortal = () => {
   const [error, setError] = useState<string | null>(null);
   const [errorDetails, setErrorDetails] = useState<string | null>(null);
   const [rawResponse, setRawResponse] = useState<any>(null);
+  const apiCallMadeRef = useRef(false);
 
   useEffect(() => {
+    // Skip duplicate calls in StrictMode
+    if (apiCallMadeRef.current) return;
+
     const fetchSubscriptions = async () => {
       try {
+        apiCallMadeRef.current = true;
         setLoading(true);
-        const response = await fetch('/api/subscriptions');
+        console.log('Fetching subscriptions data');
+
+        // Use explicit URL to clarify what's happening
+        const apiUrl = '/api/subscriptions';
+        const response = await fetch(apiUrl, {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -250,7 +263,7 @@ const CustomerPortal = () => {
     };
 
     fetchSubscriptions();
-  }, []);
+  }, []); // Empty dependency array to run only once
 
   const handleRetry = () => {
     setError(null);

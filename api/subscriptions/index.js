@@ -21,12 +21,30 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Add request timeout for additional protection
+  const TIMEOUT_DURATION = 20000; // 20 seconds
+  const requestTimeout = setTimeout(() => {
+    console.error('API timeout: Request exceeded 20 seconds');
+    return res.status(504).json({
+      error: 'Gateway Timeout',
+      message: 'The request took too long to process. Please try again later.',
+      timestamp: new Date().toISOString(),
+    });
+  }, TIMEOUT_DURATION);
+
   try {
     // Get all subscriptions
     const subscriptions = await getSubscriptions();
+
+    // Clear the timeout as request completed successfully
+    clearTimeout(requestTimeout);
+
     return res.status(200).json(subscriptions);
   } catch (error) {
-    console.error('Serverless function error:', error);
+    console.error('API error:', error.message || error);
+
+    // Clear the timeout as we're handling the error
+    clearTimeout(requestTimeout);
 
     // Extract meaningful error message
     const errorMessage = error.message || 'Internal Server Error';
@@ -41,6 +59,16 @@ module.exports = async function handler(req, res) {
       statusCode = 403; // Forbidden
     } else if (errorMessage.includes('Resource not found')) {
       statusCode = 404; // Not Found
+    } else if (
+      errorMessage.includes('timed out') ||
+      errorMessage.includes('too long to respond')
+    ) {
+      statusCode = 504; // Gateway Timeout
+    } else if (
+      errorMessage.includes('Unable to connect') ||
+      errorMessage.includes('Could not connect')
+    ) {
+      statusCode = 502; // Bad Gateway
     }
 
     // Return error response

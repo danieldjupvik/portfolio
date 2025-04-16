@@ -12,6 +12,7 @@ export const viteConfig = defineConfig({
       '/api': {
         target: 'http://localhost:4501',
         changeOrigin: true,
+        secure: false,
       },
     },
   },

@@ -14,10 +14,31 @@ const getSubscriptions = async () => {
   }
 
   try {
+    console.log('Fetching subscriptions from external API');
     const response = await apiClient.get(SUBSCRIPTION_API_URL);
     return response.data;
   } catch (error) {
-    // Handle specific error codes
+    // Handle specific error cases
+    if (error.message && error.message.includes('timed out')) {
+      console.error('Request to Lago API timed out');
+      throw new Error(
+        'The connection to the subscription service timed out. Please try again later.'
+      );
+    }
+
+    if (
+      error.message &&
+      (error.message.includes('Unable to connect') ||
+        error.code === 'ENOTFOUND' ||
+        error.code === 'ECONNREFUSED')
+    ) {
+      console.error('Connection error to Lago API');
+      throw new Error(
+        'Could not connect to the subscription service. Please check the API endpoint configuration.'
+      );
+    }
+
+    // Handle specific HTTP status codes
     if (error.response) {
       const { status } = error.response;
 
@@ -38,8 +59,8 @@ const getSubscriptions = async () => {
       }
     }
 
-    console.error('Error fetching subscriptions:', error);
-    throw error;
+    console.error('Error fetching subscriptions:', error.message || error);
+    throw new Error('Failed to fetch subscriptions. Please try again later.');
   }
 };
 

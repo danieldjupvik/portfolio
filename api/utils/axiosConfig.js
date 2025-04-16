@@ -2,7 +2,7 @@ const axios = require('axios');
 
 // Create a configured axios instance
 const apiClient = axios.create({
-  timeout: 10000, // 10 seconds
+  timeout: 1000, // 1 seconds
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${process.env.LAGO_API_KEY || ''}`,
@@ -26,8 +26,27 @@ apiClient.interceptors.response.use(
     return response;
   },
   (error) => {
-    // Handle errors globally
-    console.error('API Error:', error);
+    // Enhanced error handling
+    if (error.code === 'ECONNABORTED') {
+      console.error('Request timeout to external API');
+      return Promise.reject(
+        new Error(
+          'Request timed out. The server is taking too long to respond.'
+        )
+      );
+    }
+
+    if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+      console.error(`Connection error: ${error.code}`);
+      return Promise.reject(
+        new Error(
+          'Unable to connect to the API server. Please check your internet connection or the API endpoint.'
+        )
+      );
+    }
+
+    // Handle axios errors
+    console.error('API Error:', error.message || 'Unknown error');
     return Promise.reject(error);
   }
 );
