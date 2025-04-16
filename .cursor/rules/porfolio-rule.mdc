@@ -8,3 +8,4 @@ alwaysApply: true
 
 1. don't use export default unless absolutely needed.
 2. have styled-component under each function in a file.
+3. don't use tailwind in this project.

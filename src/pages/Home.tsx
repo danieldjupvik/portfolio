@@ -1,25 +1,26 @@
+import { lazy, Suspense, useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import Navigation from '../components/Navigation';
 import Overlay from '../components/Overlay';
-import Projects from '../components/Projects';
-import { useState } from 'react';
+
+const Projects = lazy(() => import('../components/Projects'));
 
 const Home = () => {
   const [showOverlay, setShowOverlay] = useState(true);
-  setTimeout(() => {
-    setShowOverlay(false);
-  }, 900);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowOverlay(false), 900);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showOverlay) return <Overlay />;
   return (
     <>
-      {showOverlay ? (
-        <Overlay />
-      ) : (
-        <>
-          <Navigation />
-          <Hero />
-          <Projects />
-        </>
-      )}
+      <Navigation />
+      <Hero />
+      <Suspense fallback={<div>Loading projects…</div>}>
+        <Projects />
+      </Suspense>
     </>
   );
 };

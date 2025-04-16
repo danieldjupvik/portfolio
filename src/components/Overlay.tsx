@@ -1,3 +1,4 @@
+import React from 'react';
 import logo from '../assets/icon/portfolio-v2-logo.png';
 const Overlay = () => {
   const quoteArray = [
@@ -27,4 +28,6 @@ const Overlay = () => {
   );
 };
 
-export default Overlay;
+export const MemoizedOverlay = React.memo(Overlay);
+
+export default MemoizedOverlay;

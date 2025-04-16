@@ -1,14 +1,19 @@
 const { getSubscriptions } = require('../services/subscriptionService');
 
-module.exports = async function handler(req, res) {
+const ALLOWED_METHODS = 'GET,OPTIONS';
+const ALLOWED_HEADERS =
+  'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version';
+const TIMEOUT_DURATION_MS = 20000; // 20 seconds
+
+/**
+ * API handler for subscriptions endpoint
+ */
+const handleSubscriptions = async (req, res) => {
   // Set CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Methods', ALLOWED_METHODS);
+  res.setHeader('Access-Control-Allow-Headers', ALLOWED_HEADERS);
 
   // Handle OPTIONS request (preflight)
   if (req.method === 'OPTIONS') {
@@ -18,63 +23,49 @@ module.exports = async function handler(req, res) {
 
   // Only allow GET requests
   if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
   }
 
   // Add request timeout for additional protection
-  const TIMEOUT_DURATION = 20000; // 20 seconds
   const requestTimeout = setTimeout(() => {
     console.error('API timeout: Request exceeded 20 seconds');
-    return res.status(504).json({
+    res.status(504).json({
       error: 'Gateway Timeout',
       message: 'The request took too long to process. Please try again later.',
       timestamp: new Date().toISOString(),
     });
-  }, TIMEOUT_DURATION);
+  }, TIMEOUT_DURATION_MS);
 
   try {
-    // Get all subscriptions
     const subscriptions = await getSubscriptions();
-
-    // Clear the timeout as request completed successfully
     clearTimeout(requestTimeout);
-
-    return res.status(200).json(subscriptions);
+    res.status(200).json(subscriptions);
+    return;
   } catch (error) {
-    console.error('API error:', error.message || error);
-
-    // Clear the timeout as we're handling the error
     clearTimeout(requestTimeout);
-
-    // Extract meaningful error message
     const errorMessage = error.message || 'Internal Server Error';
-
-    // Determine appropriate status code
     let statusCode = 500;
-    if (errorMessage.includes('API key is missing')) {
-      statusCode = 503; // Service Unavailable
-    } else if (errorMessage.includes('Authentication failed')) {
-      statusCode = 401; // Unauthorized
-    } else if (errorMessage.includes('Access denied')) {
-      statusCode = 403; // Forbidden
-    } else if (errorMessage.includes('Resource not found')) {
-      statusCode = 404; // Not Found
-    } else if (
+    if (errorMessage.includes('API key is missing')) statusCode = 503;
+    else if (errorMessage.includes('Authentication failed')) statusCode = 401;
+    else if (errorMessage.includes('Access denied')) statusCode = 403;
+    else if (errorMessage.includes('Resource not found')) statusCode = 404;
+    else if (
       errorMessage.includes('timed out') ||
       errorMessage.includes('too long to respond')
-    ) {
-      statusCode = 504; // Gateway Timeout
-    } else if (
+    )
+      statusCode = 504;
+    else if (
       errorMessage.includes('Unable to connect') ||
       errorMessage.includes('Could not connect')
-    ) {
-      statusCode = 502; // Bad Gateway
-    }
-
-    // Return error response
-    return res.status(statusCode).json({
+    )
+      statusCode = 502;
+    res.status(statusCode).json({
       error: errorMessage,
       timestamp: new Date().toISOString(),
     });
+    return;
   }
 };
+
+module.exports = handleSubscriptions;

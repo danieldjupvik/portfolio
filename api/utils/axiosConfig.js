@@ -1,32 +1,28 @@
 const axios = require('axios');
 
-// Create a configured axios instance
+const REQUEST_TIMEOUT_MS = 1000;
+const CONTENT_TYPE = 'application/json';
+const AUTH_HEADER = `Bearer ${process.env.LAGO_API_KEY || ''}`;
+
+// Configured axios instance for external API requests
 const apiClient = axios.create({
-  timeout: 1000, // 1 seconds
+  timeout: REQUEST_TIMEOUT_MS,
   headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.LAGO_API_KEY || ''}`,
+    'Content-Type': CONTENT_TYPE,
+    Authorization: AUTH_HEADER,
   },
 });
 
-// Add a request interceptor
+// Request interceptor (extendable for future logic)
 apiClient.interceptors.request.use(
-  (config) => {
-    // You can add additional logic here if needed
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (config) => config,
+  (error) => Promise.reject(error)
 );
 
-// Add a response interceptor
+// Response interceptor for enhanced error handling
 apiClient.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    // Enhanced error handling
     if (error.code === 'ECONNABORTED') {
       console.error('Request timeout to external API');
       return Promise.reject(
@@ -35,7 +31,6 @@ apiClient.interceptors.response.use(
         )
       );
     }
-
     if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
       console.error(`Connection error: ${error.code}`);
       return Promise.reject(
@@ -44,11 +39,9 @@ apiClient.interceptors.response.use(
         )
       );
     }
-
-    // Handle axios errors
     console.error('API Error:', error.message || 'Unknown error');
     return Promise.reject(error);
   }
 );
 
-module.exports = apiClient;
+module.exports.apiClient = apiClient;
