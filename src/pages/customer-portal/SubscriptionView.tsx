@@ -72,6 +72,39 @@ const Separator = styled.hr`
   background-color: #e5e7eb;
 `;
 
+const ManagePaymentButton = styled.button`
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #4f46e5;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+  }
+`;
+
+const Icon = styled.span`
+  display: inline-block;
+`;
+
+const STRIPE_PAYMENT_URL =
+  'https://billing.stripe.com/p/login/4gw16SbA01143YIfYY';
+
 interface SubscriptionViewProps {
   subscription: Subscription | null;
   isLoading: boolean;
@@ -108,6 +141,10 @@ const SubscriptionView = ({
       </SubscriptionStatus>
     );
   }
+
+  const handleManagePayment = () => {
+    window.open(STRIPE_PAYMENT_URL, '_blank');
+  };
 
   return (
     <>
@@ -146,6 +183,15 @@ const SubscriptionView = ({
             ).toLocaleDateString()}
           </div>
         </div>
+
+        <ManagePaymentButton
+          onClick={handleManagePayment}
+          aria-label='Manage payment method in Stripe'
+          tabIndex={0}
+        >
+          <Icon>💳</Icon>
+          Manage Payment Method
+        </ManagePaymentButton>
       </SubscriptionStatus>
 
       {subscription.status === 'active' && (
