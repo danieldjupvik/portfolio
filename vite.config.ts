@@ -23,9 +23,6 @@ export const viteConfig = defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
-  build: {
-    outDir: 'build',
-  },
   assetsInclude: [
     '**/*.PNG',
     '**/*.png',
