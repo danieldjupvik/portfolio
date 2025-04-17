@@ -1,1 +1,17 @@
-{}
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "framework": "vite",
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "devCommand": "vite dev --port $PORT",
+  "rewrites": [
+    { "source": "/api/customers", "destination": "/api/customers/index.js" },
+    {
+      "source": "/api/subscriptions",
+      "destination": "/api/subscriptions/index.js"
+    },
+    { "source": "/api/usage", "destination": "/api/usage/index.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

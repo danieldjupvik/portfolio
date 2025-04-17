@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "dev:vercel": "vercel dev --listen 4500",
+    "dev:vercel": "vercel dev --local-config vercel.dev.json --listen 4500",
     "build": "vite build",
     "vercel-build": "vite build",
     "preview": "vite preview",
