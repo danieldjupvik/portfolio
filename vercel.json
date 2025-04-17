@@ -5,7 +5,6 @@
       "source": "/api/subscriptions",
       "destination": "/api/subscriptions/index.js"
     },
-    { "source": "/api/usage", "destination": "/api/usage/index.js" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/usage", "destination": "/api/usage/index.js" }
   ]
 }

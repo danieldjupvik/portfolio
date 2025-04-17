@@ -28,8 +28,8 @@
     "deploy": "vercel --prod"
   },
   "devDependencies": {
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
     "@vitejs/plugin-react": "^4.4.0",
