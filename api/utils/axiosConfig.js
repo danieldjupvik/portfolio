@@ -1,21 +1,31 @@
 const axios = require('axios');
+const { envConfig } = require('./envConfig');
 
-const REQUEST_TIMEOUT_MS = 5000;
+// Match the timeout with serverless function timeout
+const REQUEST_TIMEOUT_MS = 15000;
 const CONTENT_TYPE = 'application/json';
-const AUTH_HEADER = `Bearer ${process.env.LAGO_API_KEY || ''}`;
 
 // Configured axios instance for external API requests
 const apiClient = axios.create({
   timeout: REQUEST_TIMEOUT_MS,
   headers: {
     'Content-Type': CONTENT_TYPE,
-    Authorization: AUTH_HEADER,
   },
 });
 
-// Request interceptor (extendable for future logic)
+// Request interceptor to add API key from environment for each request
 apiClient.interceptors.request.use(
-  (config) => config,
+  (config) => {
+    // Set the Authorization header dynamically for each request
+    // This ensures we always use the latest value from environment
+    const apiKey = envConfig.LAGO_API_KEY;
+    if (apiKey) {
+      config.headers.Authorization = `Bearer ${apiKey}`;
+    } else {
+      console.error('[API] LAGO_API_KEY is missing from environment');
+    }
+    return config;
+  },
   (error) => Promise.reject(error)
 );
 

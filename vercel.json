@@ -1,5 +1,10 @@
 {
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/$1" }],
-  "buildCommand": "npm run build",
-  "devCommand": "vite --port 4500"
+  "rewrites": [
+    { "source": "/api/customers", "destination": "/api/customers/index.js" },
+    {
+      "source": "/api/subscriptions",
+      "destination": "/api/subscriptions/index.js"
+    },
+    { "source": "/api/usage", "destination": "/api/usage/index.js" }
+  ]
 }

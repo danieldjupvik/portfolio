@@ -81,20 +81,33 @@ const ErrorMessage = styled.p`
   margin-top: 0.5rem;
 `;
 
+const Spinner = styled.div`
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 const LoginPage = () => {
-  const { login, error } = useCustomer();
+  const { login, error, isLoading } = useCustomer();
   const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     try {
       await login(email);
     } catch (err) {
       // Error is handled by the context
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -113,11 +126,18 @@ const LoginPage = () => {
               placeholder='Enter your email'
               required
               aria-label='Email Address'
+              disabled={isLoading}
             />
           </div>
           {error && <ErrorMessage>{error}</ErrorMessage>}
           <Button type='submit' disabled={isLoading}>
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? (
+              <>
+                <Spinner /> Logging in...
+              </>
+            ) : (
+              'Login'
+            )}
           </Button>
         </Form>
       </Card>

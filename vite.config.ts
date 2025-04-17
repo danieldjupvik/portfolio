@@ -10,9 +10,10 @@ export const viteConfig = defineConfig({
     port: 4500,
     proxy: {
       '/api': {
-        target: 'http://localhost:4501',
+        target: 'http://localhost:4500',
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path,
       },
     },
   },

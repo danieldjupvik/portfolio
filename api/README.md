@@ -1,112 +1,67 @@
-# API Documentation
+# API Service
 
 ## Overview
 
-This is the API layer for the Customer Portal application. It provides endpoints for customer authentication, subscription management, and usage tracking.
-
-## Structure
-
-The API follows a hybrid MVC (Model-View-Controller) pattern designed to work both as an Express application and as Vercel serverless functions:
-
-```
-api/
-  ├── controllers/      # Contains business logic for each endpoint
-  │   ├── customerController.js
-  │   ├── subscriptionController.js
-  │   └── usageController.js
-  ├── routes/           # Defines Express API routes and middleware
-  │   ├── customerRoutes.js
-  │   ├── subscriptionRoutes.js
-  │   └── usageRoutes.js
-  ├── services/         # Handles external API communication and data processing
-  │   ├── customerService.js
-  │   ├── subscriptionService.js
-  │   └── usageService.js
-  ├── utils/            # Common utilities and configuration
-  │   ├── axiosConfig.js
-  │   ├── envConfig.js
-  │   └── middleware.js
-  ├── customers/        # Vercel serverless function for customer endpoints
-  │   └── index.js
-  ├── subscriptions/    # Vercel serverless function for subscription endpoints
-  │   └── index.js
-  ├── usage/            # Vercel serverless function for usage endpoints
-  │   └── index.js
-  ├── server.js         # Express server setup (for local development)
-  └── index.js          # Entry point
-```
-
-## Deployment Architecture
-
-The API supports two deployment models:
-
-1. **Express Server**: For local development, the entire API runs as an Express server via `server.js`
-2. **Vercel Serverless Functions**: For production, the API is deployed as separate serverless functions in the `/api/{endpoint}` directories
-
-Both implementations use the same underlying controllers and services, ensuring consistent behavior.
-
-## Design Pattern
-
-The API follows these design principles:
-
-- **Separation of Concerns**: Each file has a single responsibility
-- **DRY (Don't Repeat Yourself)**: Common code is extracted to middleware and utilities
-- **Clean Architecture**: The flow goes from routes/serverless functions → controllers → services
-- **Consistent Error Handling**: Standard approach to errors across all endpoints
+This API service provides endpoints for accessing customer data, subscriptions, and usage metrics. It is implemented as a set of Vercel serverless functions that connect to the Lago API for billing and subscription management.
 
 ## Endpoints
 
-### Customer Authentication
+- **GET /api/customers**: Authenticates a customer by email
+- **GET /api/subscriptions**: Gets subscriptions for a customer
+- **GET /api/usage**: Gets usage metrics for billable items
 
-- **URL**: `/api/customers`
-- **Method**: `POST`
-- **Body**:
-  ```json
-  { "email": "customer@example.com" }
-  ```
-- **Response**: Customer data or error
+## Implementation
 
-### Customer Subscription
+The API is built using Vercel serverless functions. Each endpoint is implemented as a separate function that handles API requests directly, without using Express.
 
-- **URL**: `/api/subscriptions`
-- **Method**: `GET`
-- **Query Parameters**: `external_id` (customer ID)
-- **Response**: Subscription data or error
+### Key features:
 
-### Customer Usage
-
-- **URL**: `/api/usage`
-- **Method**: `GET`
-- **Query Parameters**:
-  - `externalCustomerId` (customer ID)
-  - `externalSubscriptionId` (subscription ID)
-- **Response**: Current usage data or error
+- **Authentication**: Customers are authenticated by their email address
+- **Error Handling**: Comprehensive error handling with appropriate HTTP status codes
+- **Timeout Protection**: Requests that take too long automatically time out
+- **CORS Support**: All endpoints include proper CORS headers
 
 ## Development
 
-### Running the API Locally
+### Requirements
+
+- Node.js 22.x or higher
+- npm 10.x or higher
+
+### Environment Variables
+
+The following environment variables are required:
+
+- `LAGO_API_KEY`: API key for accessing Lago services
+
+### Running Locally
+
+To run the API locally with the Vercel development environment:
 
 ```bash
-# Start the API server
-node api/server.js
+npm run dev:vercel
 ```
 
-### Vercel Deployment
+This will start both the frontend and the API server.
 
-The API is automatically deployed to Vercel. Each endpoint in the `/api/{endpoint}/index.js` files maps to a serverless function.
+## Architecture
+
+Each API endpoint follows this structure:
+
+1. **Request Validation**: Checks for required parameters and valid HTTP methods
+2. **Authentication**: Verifies that the request includes necessary credentials
+3. **External API Call**: Makes authenticated requests to the Lago API
+4. **Response Formatting**: Formats and returns the data with proper status codes
 
 ## Error Handling
 
-All endpoints use a consistent error handling approach:
+The API implements a standardized error-handling approach:
 
-- HTTP status codes reflect the type of error
-- Error responses include a message and timestamp
-- Timeouts are implemented to prevent hanging requests
-
-## Middleware
-
-The API includes several reusable middleware functions:
-
-- **setCorsHeaders**: Adds CORS headers to responses
-- **addRequestTimeout**: Adds a timeout to prevent hanging requests
-- **handleApiError**: Standardizes error responses
+- **400**: Missing required parameters
+- **401**: Authentication failed
+- **403**: Permission denied
+- **404**: Resource not found
+- **500**: Internal server error
+- **502**: Gateway error (cannot reach Lago API)
+- **503**: Service unavailable (missing configuration)
+- **504**: Gateway timeout

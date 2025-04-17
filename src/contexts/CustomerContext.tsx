@@ -19,6 +19,7 @@ interface CustomerContextType {
   login: (email: string) => Promise<void>;
   logout: () => void;
   error: string | null;
+  isLoading: boolean;
 }
 
 const CustomerContext = createContext<CustomerContextType | undefined>(
@@ -47,6 +48,7 @@ export const CustomerProvider = ({ children }: CustomerProviderProps) => {
     return null;
   });
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Update localStorage when customer state changes
   useEffect(() => {
@@ -59,25 +61,48 @@ export const CustomerProvider = ({ children }: CustomerProviderProps) => {
 
   const login = async (email: string) => {
     try {
+      console.log('Attempting to login with email:', email);
       setError(null);
+      setIsLoading(true);
+
+      // Use AbortController to handle timeout on the client side as well
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second client-side timeout
+
       const response = await fetch('/api/customers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
+      console.log('Response status:', response.status);
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.error('Login error:', errorData);
         throw new Error(errorData.error || 'Failed to authenticate');
       }
 
       const data = await response.json();
+      console.log('Login successful, customer data received');
       setCustomer(data.customer);
     } catch (err: any) {
-      setError(err.message);
+      console.error('Login error:', err);
+
+      // Handle abort error specifically
+      if (err.name === 'AbortError') {
+        setError('Request timed out. Please try again later.');
+      } else {
+        setError(err.message || 'An unknown error occurred');
+      }
+
       throw err;
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,6 +117,7 @@ export const CustomerProvider = ({ children }: CustomerProviderProps) => {
     login,
     logout,
     error,
+    isLoading,
   };
 
   return (

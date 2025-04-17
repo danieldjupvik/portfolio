@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 // Types
@@ -16,34 +16,34 @@ interface UsageProps {
 }
 
 interface UsageData {
-  billingPeriod: {
-    from: string;
-    to: string;
-    issuingDate: string;
-  };
+  from_datetime: string;
+  to_datetime: string;
+  issuing_date: string;
   currency: string;
-  amount: {
-    cents: number;
-    total: number;
-    taxes: number;
-  };
-  charges: Array<{
-    units: number;
-    eventsCount: number;
-    amountCents: number;
-    amountCurrency: string;
+  amount_cents: number;
+  total_amount_cents: number;
+  taxes_amount_cents: number;
+  lago_invoice_id: string | null;
+  charges_usage: Array<{
+    units: string;
+    events_count: number;
+    amount_cents: number;
+    amount_currency: string;
     charge: {
-      id: string;
-      model: string;
-      displayName: string;
+      lago_id: string;
+      charge_model: string;
+      invoice_display_name: string;
     };
-    metric: {
-      id: string;
+    billable_metric: {
+      lago_id: string;
       name: string;
       code: string;
-      aggregationType: string;
+      aggregation_type: string;
     };
+    filters: any[];
+    grouped_usage: any[];
   }>;
+  timestamp?: string;
 }
 
 // Styled components
@@ -112,6 +112,8 @@ export const Usage = ({
   const [usageData, setUsageData] = useState<UsageData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  // Use a ref to track if we've already made a request for this combination
+  const requestMadeRef = useRef<string | null>(null);
 
   useEffect(() => {
     const fetchUsageData = async (): Promise<void> => {
@@ -120,9 +122,19 @@ export const Usage = ({
         return;
       }
 
-      try {
-        const externalSubscriptionId = subscription.external_id;
+      const externalSubscriptionId = subscription.external_id;
+      // Create a unique key for this request
+      const requestKey = `${customerExternalId}:${externalSubscriptionId}`;
 
+      // Skip if we've already made this exact request
+      if (requestMadeRef.current === requestKey) {
+        return;
+      }
+
+      // Mark that we're making this request
+      requestMadeRef.current = requestKey;
+
+      try {
         const response = await fetch(
           `/api/usage?externalCustomerId=${customerExternalId}&externalSubscriptionId=${externalSubscriptionId}`
         );
@@ -134,7 +146,7 @@ export const Usage = ({
         }
 
         const data = await response.json();
-        setUsageData(data.data);
+        setUsageData(data);
       } catch (err: any) {
         console.error('Error fetching usage data:', err);
         setError(err.message || 'Failed to fetch usage data');
@@ -181,35 +193,36 @@ export const Usage = ({
       <Section>
         <SectionHeading>Billing Period</SectionHeading>
         <p>
-          {formatDate(usageData.billingPeriod.from)} to{' '}
-          {formatDate(usageData.billingPeriod.to)}
+          {formatDate(usageData.from_datetime)} to{' '}
+          {formatDate(usageData.to_datetime)}
         </p>
       </Section>
 
       <Section>
         <SectionHeading>Total Amount</SectionHeading>
         <Amount>
-          {formatCurrency(usageData.amount.total, usageData.currency)}
+          {formatCurrency(usageData.total_amount_cents, usageData.currency)}
         </Amount>
       </Section>
 
       <Section>
         <SectionHeading>Usage Breakdown</SectionHeading>
-        {usageData.charges.map((charge, index) => (
+        {usageData.charges_usage.map((charge, index) => (
           <ChargeItem key={index}>
             <ChargeName>
-              {charge.charge.displayName || charge.metric.name}
+              {charge.charge.invoice_display_name ||
+                charge.billable_metric.name}
             </ChargeName>
             <ChargeDetails>
               <div>
-                <Label>Units:</Label> {charge.units.toFixed(6)}
+                <Label>Units:</Label> {parseFloat(charge.units).toFixed(6)}
               </div>
               <div>
-                <Label>Events:</Label> {charge.eventsCount}
+                <Label>Events:</Label> {charge.events_count}
               </div>
               <div>
                 <Label>Amount:</Label>{' '}
-                {formatCurrency(charge.amountCents, charge.amountCurrency)}
+                {formatCurrency(charge.amount_cents, charge.amount_currency)}
               </div>
             </ChargeDetails>
           </ChargeItem>
