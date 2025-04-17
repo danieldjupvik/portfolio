@@ -1,11 +1,11 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import { HeroBackground } from './components/HeroBackground';
-import { CustomerProvider } from './contexts/CustomerContext';
 import AI from './pages/AI';
 import AIPrivacyPolicy from './pages/AIPrivacyPolicy';
 import AITermsOfServicePage from './pages/AITermsOfServicePage';
 import CustomerPortal from './pages/customer-portal';
+import { CustomerProvider } from './pages/customer-portal/contexts/CustomerContext';
 import Home from './pages/Home';
 import MovieWatcht from './pages/MovieWatcht';
 import Privacy from './pages/Privacy';

@@ -1,4 +1,6 @@
 // Define the type directly to avoid import issues
+import { getStoredSubscription, storeSubscription } from './utils/storageUtils';
+
 interface Subscription {
   status: string;
   plan_code: string;
@@ -23,14 +25,13 @@ export const fetchCustomerSubscription = async (
     return null;
   }
 
-  // Check localStorage first
-  const cachedSubscription = localStorage.getItem(`subscription_${externalId}`);
-  if (cachedSubscription) {
-    try {
-      return JSON.parse(cachedSubscription);
-    } catch (err) {
-      localStorage.removeItem(`subscription_${externalId}`);
-    }
+  // Check storage first
+  const cachedSubscription = getStoredSubscription();
+  if (
+    cachedSubscription &&
+    cachedSubscription.external_customer_id === externalId
+  ) {
+    return cachedSubscription;
   }
 
   try {
@@ -61,10 +62,7 @@ export const fetchCustomerSubscription = async (
     };
 
     // Cache the subscription data
-    localStorage.setItem(
-      `subscription_${externalId}`,
-      JSON.stringify(formattedSubscription)
-    );
+    storeSubscription(formattedSubscription);
 
     return formattedSubscription;
   } catch (err) {
@@ -73,11 +71,8 @@ export const fetchCustomerSubscription = async (
 };
 
 /**
- * Clear the cached subscription data for a customer
- * @param externalId Customer external ID
+ * Clear the cached subscription data
  */
-export const clearSubscriptionCache = (externalId: string): void => {
-  if (externalId) {
-    localStorage.removeItem(`subscription_${externalId}`);
-  }
+export const clearSubscriptionCache = (): void => {
+  storeSubscription(null);
 };

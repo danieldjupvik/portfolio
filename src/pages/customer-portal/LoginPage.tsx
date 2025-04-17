@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
-import { useCustomer } from '../../contexts/CustomerContext';
+import { useCustomer } from './contexts/CustomerContext';
 
 const Container = styled.div`
   padding: 2rem;

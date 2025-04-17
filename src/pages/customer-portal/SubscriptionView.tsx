@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Usage } from '../../components/Usage';
+import { Usage } from './components/Usage';
 
 // Define the type directly to avoid import issues
 interface Subscription {
@@ -83,6 +83,8 @@ const SubscriptionView = ({
   isLoading,
   error,
 }: SubscriptionViewProps) => {
+  // Only show loading spinner if explicitly requested
+  // (We're now handling most loading states at the CustomerPortal level)
   if (isLoading) {
     return (
       <SubscriptionStatus>
