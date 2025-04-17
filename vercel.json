@@ -5,6 +5,10 @@
       "source": "/api/subscriptions",
       "destination": "/api/subscriptions/index.js"
     },
-    { "source": "/api/usage", "destination": "/api/usage/index.js" }
+    { "source": "/api/usage", "destination": "/api/usage/index.js" },
+    {
+      "source": "^/((?!api/).*)",
+      "destination": "/index.html"
+    }
   ]
 }
