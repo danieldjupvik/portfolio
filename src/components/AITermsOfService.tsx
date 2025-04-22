@@ -1,5 +1,3 @@
-import React from 'react';
-
 // This component contains shared terms of service content
 // It can be imported and used on both the AI page and the dedicated terms page
 // The isExtended prop determines whether to show the extended version

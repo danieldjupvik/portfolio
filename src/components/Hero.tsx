@@ -9,7 +9,7 @@ const Hero = () => {
           <h1 className='hero__intro--heading'>
             <span className='hero__intro--span'>Hi,</span>
             <span className='hero__intro--span'>
-              I’m
+              I'm
               <span className='hero__intro--name' id='typedtext'>
                 <Typewriter
                   onInit={(typewriter) => {
@@ -38,4 +38,6 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export const MemoizedHero = React.memo(Hero);
+
+export default MemoizedHero;

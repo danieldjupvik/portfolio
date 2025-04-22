@@ -49,4 +49,8 @@ const Navigation = () => {
     </header>
   );
 };
-export default Navigation;
+
+import React from 'react';
+export const MemoizedNavigation = React.memo(Navigation);
+
+export default MemoizedNavigation;

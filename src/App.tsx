@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
+import { HeroBackground } from './components/HeroBackground';
 import AI from './pages/AI';
 import AIPrivacyPolicy from './pages/AIPrivacyPolicy';
 import AITermsOfServicePage from './pages/AITermsOfServicePage';
@@ -10,6 +11,7 @@ import Privacy from './pages/Privacy';
 function App() {
   return (
     <div className='App'>
+      <HeroBackground />
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />

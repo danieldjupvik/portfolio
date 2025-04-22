@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .footer {
   padding: $global-spacing * 2;
   display: flex;

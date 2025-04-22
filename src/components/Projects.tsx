@@ -1,12 +1,12 @@
-import movieWatch from '../assets/project-logo/MovieWatcht.png';
-import infracity from '../assets/project-logo/infracity.png';
-import gameNow from '../assets/project-logo/semester-project-2-logo.png';
-import lasr from '../assets/project-logo/LASR-logo.png';
-import eduplaytion from '../assets/project-logo/eduplay-logo.png';
+import { Link } from 'react-router-dom';
+import profilePicture from '../assets/img/profile-picture.jpeg';
 import bergenTekniske from '../assets/project-logo/BERGENS-TEKNISKE-MUSEUM.png';
 import holidaze from '../assets/project-logo/Holidaze-logo-white.png';
-import profilePicture from '../assets/img/profile-picture.jpeg';
-import { Link } from 'react-router-dom';
+import lasr from '../assets/project-logo/LASR-logo.png';
+import movieWatch from '../assets/project-logo/MovieWatcht.png';
+import eduplaytion from '../assets/project-logo/eduplay-logo.png';
+import infracity from '../assets/project-logo/infracity.png';
+import gameNow from '../assets/project-logo/semester-project-2-logo.png';
 
 const Projects = () => {
   const born = 1998;
@@ -37,6 +37,7 @@ const Projects = () => {
                 src={holidaze}
                 alt='Holidaze'
                 className='projects__box--img'
+                loading='lazy'
               />
             </div>
           </a>
@@ -52,6 +53,7 @@ const Projects = () => {
                 src={movieWatch}
                 alt='MovieWatch'
                 className='projects__box--img'
+                loading='lazy'
               />
             </div>
           </Link>
@@ -70,6 +72,7 @@ const Projects = () => {
                 src={infracity}
                 alt='Infracity'
                 className='projects__box--img'
+                loading='lazy'
               />
             </div>
           </a>
@@ -88,6 +91,7 @@ const Projects = () => {
                 src={gameNow}
                 alt='Game Now'
                 className='projects__box--img'
+                loading='lazy'
               />
             </div>
           </a>
@@ -102,7 +106,12 @@ const Projects = () => {
             rel='noopener noreferrer'
           >
             <div className='projects__box--img-div'>
-              <img src={lasr} alt='LASR' className='projects__box--img' />
+              <img
+                src={lasr}
+                alt='LASR'
+                className='projects__box--img'
+                loading='lazy'
+              />
             </div>
           </a>
         </div>
@@ -120,6 +129,7 @@ const Projects = () => {
                 src={eduplaytion}
                 alt='Eduplaytion'
                 className='projects__box--img'
+                loading='lazy'
               />
             </div>
           </a>
@@ -138,6 +148,7 @@ const Projects = () => {
                 src={bergenTekniske}
                 alt='Bergen Tekniske'
                 className='projects__box--img'
+                loading='lazy'
               />
             </div>
           </a>
@@ -156,6 +167,7 @@ const Projects = () => {
           className='about-section--img'
           src={profilePicture}
           alt='profile'
+          loading='lazy'
         />
         <p className='about-section--paragraph'>
           My name is Daniel and Im a {myAge} year old man from Gursken,

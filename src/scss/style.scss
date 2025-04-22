@@ -1,14 +1,14 @@
 /* set up */
-@import 'variables';
-@import 'base';
+@use 'variables' as *;
+@use 'base';
 
 /* Partials */
-@import 'partials/navbar';
-@import 'partials/hero';
-@import 'partials/footer';
-@import 'partials/main';
-@import 'partials/projects';
-@import 'partials/about';
-@import 'partials/my-skills';
-@import 'partials/contact-me';
-@import 'partials/loader';
+@use 'partials/navbar';
+@use 'partials/hero';
+@use 'partials/footer';
+@use 'partials/main';
+@use 'partials/projects';
+@use 'partials/about';
+@use 'partials/my-skills';
+@use 'partials/contact-me';
+@use 'partials/loader';
