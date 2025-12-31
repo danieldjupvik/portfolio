@@ -237,7 +237,7 @@ const Projects = () => {
         <div className='contact-me'>
           <div className='contact-me__box'>
             <i className='fas fa-at'></i>
-            <a href='mailto:daniel_22@icloud.com'>E-mail</a>
+            <a href='mailto:sockets.might-9b@icloud.com'>E-mail</a>
           </div>
           <div className='contact-me__box'>
             <i className='fab fa-facebook-f'></i>
