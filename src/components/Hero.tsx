@@ -25,7 +25,7 @@ const Hero = () => {
           </h1>
         </div>
         <div className='buttons'>
-          <a href='mailto:daniel_22@icloud.com' className='buttons--contact-me'>
+          <a href='mailto:sockets.might-9b@icloud.com' className='buttons--contact-me'>
             Contact me
           </a>
           <a href='#projects' className='buttons--projects'>

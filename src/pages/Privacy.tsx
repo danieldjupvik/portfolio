@@ -155,7 +155,7 @@ const Privacy = () => {
       </p>
       <p>
         If you have any questions or suggestions about my Privacy Policy, do not
-        hesitate to contact me at daniel_22@live.no.
+        hesitate to contact me at sockets.might-9b@icloud.com.
       </p>
     </div>
   );
