@@ -204,7 +204,7 @@ const Projects = () => {
           <div className='about-content'>
             <p className='about-content__text'>
               I'm a <span className='highlight'>{myAge}-year-old developer</span> from
-              Gursken, Sunnmøre, currently based in Bergen, Norway.
+              Gursken, Sunnmøre, currently based in Ulsteinvik, Norway.
             </p>
             <p className='about-content__text'>
               With a background in Frontend Development from Noroff, I specialize in
