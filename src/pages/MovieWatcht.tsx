@@ -1,92 +1,50 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { SubPageHeader } from '../components/SubPageHeader';
 import downloadAppStore from '../assets/img/app-store.png';
 import downloadGooglePlay from '../assets/img/download-google-play-store-logo.png';
 import movieWatchtScreenshot from '../assets/img/movieWatcht-screenshot.PNG';
 
 const MovieWatcht = () => {
-  document.title = 'Daniel | MovieWatcht';
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
-  return (
-    <div className='container'>
-      <div style={{ color: 'white', marginTop: '30px' }}>
-        <div onClick={goBack} style={{ cursor: 'pointer' }}>
-          Go back
-        </div>
-      </div>
-      <div className='main__heading'>
-        <h1 className='main__heading--h1'>
-          <span className='main__heading--firstWord'>App</span> MovieWatcht
-          <span className='main__heading--dot'>.</span>
-        </h1>
-      </div>
+  useEffect(() => {
+    document.title = 'Daniel | MovieWatcht';
+  }, []);
 
-      <div
-        style={{
-          width: '250px',
-          margin: '0 auto',
-          boxShadow: '0 0 35px 1px black',
-        }}
-      >
-        <img
-          style={{ borderRadius: '10px' }}
-          src={movieWatchtScreenshot}
-          alt='moviewatcht screenshot'
-        />
-      </div>
-      <div
-        style={{
-          color: 'white',
-          maxWidth: '450px',
-          margin: '0 auto',
-          marginTop: '40px',
-        }}
-      >
-        <p>
-          MovieWacht is a movie and series information app powered by TMDb.
-          Where you can discover new movies and save movies to Watch List for a
-          to-do list for movies and series.
-        </p>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          marginTop: '60px',
-          marginBottom: '60px',
-        }}
-      >
-        <div>
+  return (
+    <div className='subpage'>
+      <SubPageHeader />
+
+      <div className='subpage-content'>
+        <h1 className='subpage-title'>
+          <span className='subpage-title__accent'>Movie</span>Watcht
+          <span className='subpage-title__dot'>.</span>
+        </h1>
+
+        <div className='moviewatcht-screenshot'>
+          <img src={movieWatchtScreenshot} alt='MovieWatcht app screenshot' />
+        </div>
+
+        <div className='subpage-text' style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <p>
+            MovieWatcht is a movie and series information app powered by TMDb.
+            Discover new movies and save them to your Watch List for easy tracking.
+          </p>
+        </div>
+
+        <div className='moviewatcht-downloads'>
           <a href='https://apps.apple.com/us/app/moviewatcht/id1559449586'>
-            <img
-              style={{
-                maxWidth: '200px',
-                minWidth: '150px',
-                marginRight: '20px',
-              }}
-              src={downloadAppStore}
-              alt='download App Store'
-            />
+            <img src={downloadAppStore} alt='Download on App Store' />
           </a>
-        </div>
-        <div>
           <a href='https://play.google.com/store/apps/details?id=com.danieldjupvik.MovieWatcht&hl'>
-            <img
-              style={{
-                maxWidth: '200px',
-                minWidth: '170px',
-              }}
-              src={downloadGooglePlay}
-              alt='download Google Play'
-            />
+            <img src={downloadGooglePlay} alt='Get it on Google Play' />
           </a>
         </div>
-      </div>
-      <div style={{ textAlign: 'center', padding: '30px', color: 'white' }}>
-        <Link to='/privacy'>Privacy Policy</Link>
+
+        <div className='subpage-footer'>
+          <p>
+            <Link to='/privacy'>Privacy Policy</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

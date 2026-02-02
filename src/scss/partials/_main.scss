@@ -1,21 +1,52 @@
 @use '../variables' as *;
 
-.main {
-  padding-top: 197.33px;
-  &__heading {
-    display: flex;
-    justify-content: center;
-    padding-top: $global-spacing * 3;
-    padding-bottom: $global-spacing * 3;
+.main-content {
+  background-color: $background-color;
+  position: relative;
+}
+
+.section {
+  padding: $global-spacing * 4 $global-spacing * 1.5;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s $ease-out-expo, transform 0.8s $ease-out-expo;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $global-spacing * 3;
+    padding-top: 100px;
+    margin-top: -100px;
+  }
+
+  &__label {
+    display: inline-block;
     font-family: $heading;
-    &--h1 {
-      font-size: 30px;
-      color: white;
-      margin: 0;
-    }
-    &--firstWord {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $brand-color;
+    margin-bottom: $global-spacing;
+    opacity: 0.8;
+  }
+
+  &__title {
+    font-family: $heading;
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: $bold;
+    color: white;
+    margin: 0;
+
+    &--accent {
       color: $brand-color;
     }
+
     &--dot {
       color: $red-color;
     }
@@ -23,14 +54,11 @@
 }
 
 @media only screen and (min-width: $max-width) {
-  .main {
-    padding-top: 121.33px;
-    &__heading {
-      padding-top: $global-spacing * 4;
+  .section {
+    padding: $global-spacing * 6 $global-spacing * 3;
 
-      &--h1 {
-        font-size: 36px;
-      }
+    &__header {
+      margin-bottom: $global-spacing * 4;
     }
   }
 }

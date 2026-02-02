@@ -1,7 +1,7 @@
 # Portfolio Project Context
 
 ## Project Overview
-This is a personal portfolio website built with **React 18**, **TypeScript**, and **Vite**. It features a responsive design, custom styling via SCSS, and routing using `react-router-dom`. The project is deployed on Vercel and may include serverless functions or an Express API integration.
+This is a personal portfolio website built with **React 19**, **TypeScript**, and **Vite**. It features a responsive design, custom styling via SCSS, and routing using `react-router-dom`. The project is deployed on Vercel and may include serverless functions or an Express API integration.
 
 ## Prerequisites & Setup
 - **Node.js:** Version 20.x (as specified in `.nvmrc` and `package.json`).
@@ -43,9 +43,9 @@ npm install      # Install dependencies
   - **`hooks/`**: Custom React hooks.
 
 ### Core Technologies
-- **Framework:** React 18 (Functional Components + Hooks).
+- **Framework:** React 19 (Functional Components + Hooks).
 - **Build Tool:** Vite.
-- **Routing:** `react-router-dom` v6.
+- **Routing:** `react-router-dom` v7.
 - **Styling:** SCSS with BEM naming convention.
   - Global entry: `src/scss/style.scss`.
   - Partials: `src/scss/partials/_*.scss`.

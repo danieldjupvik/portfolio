@@ -1,89 +1,41 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { SubPageHeader } from '../components/SubPageHeader';
 import AITermsOfService from '../components/AITermsOfService';
-import useScrollToTop from '../hooks/useScrollToTop';
 
 const AITermsOfServicePage = () => {
-  document.title = 'Daniel AI | Terms of Service';
-  const navigate = useNavigate();
-  const { BackToTopButton } = useScrollToTop();
-
-  const goBack = () => {
-    navigate('/ai');
-  };
+  useEffect(() => {
+    document.title = 'Daniel AI | Terms of Service';
+  }, []);
 
   return (
-    <div className='container'>
-      <div style={{ color: 'white', marginTop: '30px' }}>
-        <div onClick={goBack} style={{ cursor: 'pointer' }}>
-          Go back
-        </div>
-      </div>
+    <div className='subpage'>
+      <SubPageHeader />
 
-      <div className='main__heading'>
-        <h1 className='main__heading--h1'>
-          <span className='main__heading--firstWord'>Terms</span> of Service
-          <span className='main__heading--dot'>.</span>
+      <div className='subpage-content'>
+        <h1 className='subpage-title'>
+          <span className='subpage-title__accent'>Terms</span> of Service
+          <span className='subpage-title__dot'>.</span>
         </h1>
-      </div>
 
-      <div
-        style={{
-          color: 'white',
-          width: '100%',
-          maxWidth: '800px',
-          margin: '40px auto',
-          padding: '20px',
-        }}
-      >
-        <div style={{ marginBottom: '30px' }}>
-          <p
-            style={{
-              fontSize: '16px',
-              lineHeight: '1.6',
-              marginBottom: '15px',
-            }}
-          >
-            Last Updated: {new Date().toLocaleDateString()}
+        <div className='subpage-text'>
+          <p><em>Last Updated: January 15, 2025</em></p>
+          <p>
+            Please read these Terms of Service carefully before using the Daniel AI
+            service. By using our service, you agree to be bound by these Terms.
           </p>
-          <p style={{ fontSize: '16px', lineHeight: '1.6' }}>
-            Please read these Terms of Service ("Terms") carefully before using
-            the Daniel AI service. By using our service, you agree to be bound
-            by these Terms.
-          </p>
+
+          <AITermsOfService isExtended={true} />
         </div>
 
-        {/* Use the shared Terms of Service component with extended content */}
-        <AITermsOfService isExtended={true} />
-      </div>
-
-      <div
-        style={{
-          color: 'white',
-          width: '100%',
-          maxWidth: '800px',
-          margin: '0 auto 40px',
-          padding: '0 20px',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div className='subpage-footer'>
           <p>
-            <Link to='/ai' style={{ color: '#74f7d9' }}>
-              Back to Daniel AI
-            </Link>
+            <Link to='/ai'>Back to Daniel AI</Link>
+            {' · '}
+            <Link to='/ai/privacy-policy'>Privacy Policy</Link>
           </p>
-          <p>
-            <Link to='/ai/privacy-policy' style={{ color: '#74f7d9' }}>
-              View Privacy Policy
-            </Link>
-          </p>
+          <p style={{ marginTop: '1rem' }}>© {new Date().getFullYear()} Daniel AI</p>
         </div>
-      </div>
-
-      <BackToTopButton />
-
-      <div style={{ textAlign: 'center', padding: '50px 0', color: 'white' }}>
-        <p>© {new Date().getFullYear()} Daniel AI. All rights reserved.</p>
       </div>
     </div>
   );

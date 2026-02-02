@@ -16,7 +16,7 @@ Requires Node.js v20+ (use `nvm use` to switch via .nvmrc).
 
 ## Architecture
 
-React 18 SPA with React Router v6, built with Vite and TypeScript.
+React 19 SPA with React Router v7, built with Vite and TypeScript.
 
 **Routes:**
 - `/` - Main portfolio (Hero, Projects, About, Skills, Contact)

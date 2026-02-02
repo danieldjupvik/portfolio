@@ -5,7 +5,14 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export const viteConfig = defineConfig({
-  plugins: [react(), viteTsconfigPaths()],
+  plugins: [
+    react({
+      babel: {
+        plugins: ['babel-plugin-react-compiler'],
+      },
+    }),
+    viteTsconfigPaths(),
+  ],
   server: {
     port: 4500,
     proxy: {

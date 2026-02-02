@@ -1,46 +1,87 @@
 @use '../variables' as *;
 
-.contact-me {
-  &__box {
-    color: $light-grey;
-    padding: $global-spacing;
-    font-size: 18px;
-    position: relative;
-  }
-  &__box a {
-    text-decoration: underline;
-    margin-left: 50px;
-  }
-  &__box i {
-    color: $brand-color;
-    font-size: 30px;
-    vertical-align: middle;
-    position: absolute;
-  }
+.section--contact {
+  padding-bottom: $global-spacing * 6;
+  text-align: center;
 }
 
-.contact-me-wrapper {
+.contact-subtitle {
+  font-family: $massText;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 $global-spacing * 3;
+  letter-spacing: 0.3px;
+}
+
+.contact-links {
   display: flex;
   justify-content: center;
-  margin-bottom: $global-spacing * 3;
+  gap: $global-spacing * 2;
+}
+
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $global-spacing * 0.75;
+  padding: $global-spacing * 1.5;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all $duration-normal $ease-out-expo;
+  width: 100px;
+  height: 100px;
+
+  svg {
+    color: $brand-color;
+    transition: transform $duration-normal $ease-out-expo;
+  }
+
+  span {
+    font-family: $heading;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color $duration-normal $ease-out-expo;
+  }
+
+  &:hover {
+    border-color: rgba(116, 247, 217, 0.3);
+    background: rgba(116, 247, 217, 0.05);
+    transform: translateY(-4px);
+
+    svg {
+      transform: scale(1.15);
+    }
+
+    span {
+      color: white;
+    }
+  }
 }
 
 @media only screen and (min-width: $max-width) {
-  .contact-me-wrapper {
-    margin-bottom: $global-spacing * 6;
+  .section--contact {
+    padding-bottom: $global-spacing * 8;
   }
 
-  .contact-me {
-    display: flex;
+  .contact-subtitle {
+    font-size: 20px;
+    margin-bottom: $global-spacing * 4;
+  }
 
-    &__box {
-      color: $light-grey;
-      padding: $global-spacing;
-      font-size: 18px;
-      position: relative;
-    }
-    &__box a:hover {
-      color: $brand-color;
+  .contact-links {
+    gap: $global-spacing * 3;
+  }
+
+  .contact-link {
+    width: 120px;
+    height: 120px;
+    padding: $global-spacing * 2;
+
+    span {
+      font-size: 12px;
     }
   }
 }

@@ -1,93 +1,311 @@
 @use '../variables' as *;
 
 .hero {
-  background-image: var(--hero-mobile-bg, url('/images/hero-mobile.jpg'));
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding-top: 150px;
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 35px 1px black;
+  overflow: hidden;
+  background: #0a0a0a;
+
+  // Grain overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Vignette effect
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  &__aurora {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 $global-spacing * 1.5;
+    max-width: 800px;
+  }
 
   &__intro {
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding-top: $global-spacing * 1;
-    padding-bottom: $global-spacing * 8;
+    margin-bottom: $global-spacing * 3;
+
+    &--label {
+      display: inline-block;
+      font-family: $heading;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: $brand-color;
+      padding: 8px 20px;
+      border: 1px solid rgba(116, 247, 217, 0.3);
+      border-radius: 100px;
+      margin-bottom: $global-spacing * 2;
+      background: rgba(116, 247, 217, 0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s $ease-out-expo, transform 0.6s $ease-out-expo;
+      transition-delay: 0.2s;
+    }
+
     &--heading {
-      margin: 0;
-      font-size: 34px;
-      font-family: $heading !important;
+      font-family: $heading;
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      font-weight: $bold;
+      color: white;
+      line-height: 1.1;
+      margin: 0 0 $global-spacing * 1.5;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
-    &--span {
+
+    &--line {
       display: block;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s $ease-out-expo, transform 0.8s $ease-out-expo;
     }
+
+    &--line-1 {
+      transition-delay: 0.3s;
+    }
+
+    &--line-2 {
+      transition-delay: 0.45s;
+    }
+
     &--name {
       display: inline-block;
-      margin-left: 13px;
       color: $brand-color;
+
+      .Typewriter {
+        display: inline;
+      }
+
+      .Typewriter__cursor {
+        color: $brand-color;
+        font-weight: $light;
+      }
     }
+
+    &--cursor {
+      color: $brand-color;
+      font-weight: $light;
+      animation: blink 1s step-end infinite;
+    }
+
     &--dot {
       color: $red-color;
+    }
+
+    &--tagline {
+      font-family: $massText;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      margin: 0;
+      letter-spacing: 0.3px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s $ease-out-expo, transform 0.6s $ease-out-expo;
+      transition-delay: 0.6s;
+    }
+
+    &.is-visible {
+      .hero__intro--label,
+      .hero__intro--line,
+      .hero__intro--tagline {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $global-spacing * 2;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s $ease-out-expo, transform 0.6s $ease-out-expo;
+    transition-delay: 0.75s;
+
+    &.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: $heading;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 16px 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all $duration-normal $ease-out-expo;
+    min-width: 180px;
+
+    svg {
+      transition: transform $duration-normal $ease-out-expo;
+    }
+
+    &--primary {
+      background: $brand-color;
+      color: $background-color;
+      box-shadow: 0 4px 20px rgba(116, 247, 217, 0.2);
+
+      &:hover {
+        background: white;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(116, 247, 217, 0.35);
+
+        svg {
+          transform: translateX(5px);
+        }
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 25px rgba(116, 247, 217, 0.25);
+      }
+    }
+
+    &--secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: $light-grey;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-3px);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+
+  &__scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+    opacity: 0;
+    animation: heroFadeIn 0.6s $ease-out-expo forwards;
+    animation-delay: 1.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &--text {
+      font-family: $heading;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      transition: color $duration-normal $ease-out-expo;
+    }
+
+    &--icon {
+      color: $brand-color;
+      animation: bounce 2.5s ease-in-out infinite;
+    }
+
+    &:hover {
+      .hero__scroll--text {
+        color: $brand-color;
+      }
     }
   }
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: $heading;
-  font-size: 18px;
-  &--contact-me {
-    color: $brand-color;
-    padding: $global-spacing;
-    border: solid 2px $brand-color;
-    border-radius: 10px;
-    margin-bottom: $global-spacing * 3;
-    width: 160px;
-    text-align: center;
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
   }
-  &--projects {
-    color: $brand-color;
-    padding: $global-spacing;
-    border: solid 2px $brand-color;
-    border-radius: 10px;
-    width: 160px;
-    text-align: center;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
   }
 }
 
 @media only screen and (min-width: $max-width) {
   .hero {
-    background-image: var(--hero-desktop-bg, url('/images/hero-desktop.jpg'));
-    background-position: center;
     &__intro {
-      padding-top: 0;
-      padding-bottom: 180px;
-      &--heading {
-        font-size: 37px;
+      &--label {
+        font-size: 13px;
+      }
+
+      &--tagline {
+        font-size: 20px;
       }
     }
-  }
-  .buttons {
-    flex-direction: row;
-    justify-content: center;
-    padding-bottom: 0;
-    &--contact-me {
-      margin-bottom: 0;
-      margin-right: $global-spacing * 3;
+
+    &__actions {
+      flex-direction: row;
+      gap: $global-spacing * 1.5;
     }
-    &--contact-me:hover {
-      background-color: $brand-color;
-      color: black;
-    }
-    &--projects:hover {
-      background-color: $brand-color;
-      color: black;
+
+    &__btn {
+      font-size: 15px;
+      padding: 18px 36px;
     }
   }
 }

@@ -2,6 +2,10 @@
 @use 'variables' as *;
 @use 'base';
 
+/* Utilities */
+@use 'partials/animations';
+@use 'partials/cursor';
+
 /* Partials */
 @use 'partials/navbar';
 @use 'partials/hero';
@@ -9,6 +13,5 @@
 @use 'partials/main';
 @use 'partials/projects';
 @use 'partials/about';
-@use 'partials/my-skills';
 @use 'partials/contact-me';
-@use 'partials/loader';
+@use 'partials/subpage';
