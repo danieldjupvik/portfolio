@@ -1,8 +1,10 @@
 /* Colors */
 $background-color: #1d1d1d;
+$background-darker: #141414;
 $navbar-color: #181818;
 $light-grey: #e5e5e5;
 $brand-color: #74f7d9;
+$brand-color-dim: rgba(116, 247, 217, 0.15);
 $red-color: #e10b17;
 
 /* spacing */
@@ -19,3 +21,13 @@ $bold: 700;
 
 /* Max Width on desktop */
 $max-width: 768px;
+$max-width-lg: 1200px;
+
+/* Timing functions */
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+/* Animation durations */
+$duration-fast: 0.2s;
+$duration-normal: 0.4s;
+$duration-slow: 0.8s;

@@ -1,7 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
-
-import { HeroBackground } from './components/HeroBackground';
+import { Cursor } from './components/Cursor';
 import AI from './pages/AI';
 import AIPrivacyPolicy from './pages/AIPrivacyPolicy';
 import AITermsOfServicePage from './pages/AITermsOfServicePage';
@@ -12,7 +11,7 @@ import Privacy from './pages/Privacy';
 function App() {
   return (
     <div className='App'>
-      <HeroBackground />
+      <Cursor />
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />

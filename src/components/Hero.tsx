@@ -1,39 +1,141 @@
-import React from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Typewriter from 'typewriter-effect';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 
 const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [showTypewriter, setShowTypewriter] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>(0);
+  const timeRef = useRef(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    // Start typewriter after intro animation completes
+    const typewriterTimer = setTimeout(() => setShowTypewriter(true), 900);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(typewriterTimer);
+    };
+  }, []);
+
+  const draw = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    timeRef.current += 0.008;
+    const time = timeRef.current;
+
+    const width = canvas.width;
+    const height = canvas.height;
+
+    ctx.fillStyle = '#141414';
+    ctx.fillRect(0, 0, width, height);
+
+    const blob1X = width * (0.3 + Math.sin(time) * 0.15);
+    const blob1Y = height * (0.3 + Math.sin(time * 1.3) * 0.15);
+
+    const gradient1 = ctx.createRadialGradient(
+      blob1X, blob1Y, 0,
+      blob1X, blob1Y, width * 0.5
+    );
+    gradient1.addColorStop(0, 'rgba(116, 247, 217, 0.18)');
+    gradient1.addColorStop(0.4, 'rgba(116, 247, 217, 0.06)');
+    gradient1.addColorStop(1, 'transparent');
+
+    ctx.fillStyle = gradient1;
+    ctx.fillRect(0, 0, width, height);
+
+    const blob2X = width * (0.7 + Math.cos(time * 0.7) * 0.2);
+    const blob2Y = height * (0.6 + Math.sin(time * 0.9) * 0.2);
+
+    const gradient2 = ctx.createRadialGradient(
+      blob2X, blob2Y, 0,
+      blob2X, blob2Y, width * 0.4
+    );
+    gradient2.addColorStop(0, 'rgba(116, 247, 217, 0.12)');
+    gradient2.addColorStop(0.5, 'rgba(116, 247, 217, 0.03)');
+    gradient2.addColorStop(1, 'transparent');
+
+    ctx.fillStyle = gradient2;
+    ctx.fillRect(0, 0, width, height);
+
+    animationRef.current = requestAnimationFrame(draw);
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    animationRef.current = requestAnimationFrame(draw);
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [draw]);
+
   return (
     <div className='hero' id='home'>
-      <div className='hero-wrapper'>
-        <div className='hero__intro'>
+      <canvas ref={canvasRef} className='hero__canvas' />
+
+      <div className='hero__content'>
+        <div className={`hero__intro ${isVisible ? 'is-visible' : ''}`}>
+          <span className='hero__intro--label'>Frontend Developer</span>
           <h1 className='hero__intro--heading'>
-            <span className='hero__intro--span'>Hi,</span>
-            <span className='hero__intro--span'>
-              I'm
-              <span className='hero__intro--name' id='typedtext'>
-                <Typewriter
-                  onInit={(typewriter) => {
-                    typewriter.typeString('Daniel').start();
-                  }}
-                />
-              </span>
-              ,
+            <span className='hero__intro--line hero__intro--line-1'>
+              Hi, I'm
             </span>
-            <span className='hero__intro--span'>
-              a developer<span className='hero__intro--dot'>.</span>
+            <span className='hero__intro--line hero__intro--line-2'>
+              <span className='hero__intro--name'>
+                {showTypewriter ? (
+                  <Typewriter
+                    onInit={(typewriter) => {
+                      typewriter.typeString('Daniel').start();
+                    }}
+                    options={{
+                      cursor: '_',
+                      delay: 120,
+                    }}
+                  />
+                ) : (
+                  <span className='hero__intro--cursor'>_</span>
+                )}
+              </span>
+              <span className='hero__intro--dot'>.</span>
             </span>
           </h1>
+          <p className='hero__intro--tagline'>
+            Building digital experiences with code & creativity
+          </p>
         </div>
-        <div className='buttons'>
-          <a href='mailto:sockets.might-9b@icloud.com' className='buttons--contact-me'>
-            Contact me
+
+        <div className={`hero__actions ${isVisible ? 'is-visible' : ''}`}>
+          <a href='mailto:sockets.might-9b@icloud.com' className='hero__btn hero__btn--primary'>
+            <span>Get in touch</span>
+            <ArrowRight size={20} />
           </a>
-          <a href='#projects' className='buttons--projects'>
-            {' '}
-            My Projects{' '}
+          <a href='#projects' className='hero__btn hero__btn--secondary'>
+            View work
           </a>
         </div>
       </div>
+
+      <a href='#projects' className='hero__scroll'>
+        <span className='hero__scroll--text'>Scroll</span>
+        <ChevronDown size={20} className='hero__scroll--icon' />
+      </a>
     </div>
   );
 };
