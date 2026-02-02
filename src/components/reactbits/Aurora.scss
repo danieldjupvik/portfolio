@@ -1,0 +1,22 @@
+.aurora-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  animation: auroraFadeIn 1s ease-out 0.2s forwards;
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+}
+
+@keyframes auroraFadeIn {
+  to {
+    opacity: 1;
+  }
+}

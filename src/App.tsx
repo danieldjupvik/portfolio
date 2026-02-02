@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Cursor } from './components/Cursor';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ClickSpark } from './components/reactbits';
 import AI from './pages/AI';
 import AIPrivacyPolicy from './pages/AIPrivacyPolicy';
 import AITermsOfServicePage from './pages/AITermsOfServicePage';
@@ -13,6 +14,13 @@ function App() {
   return (
     <div className='App'>
       <Cursor />
+      <ClickSpark
+        sparkColor='#74f7d9'
+        sparkSize={12}
+        sparkRadius={20}
+        sparkCount={8}
+        duration={500}
+      />
       <Router>
         <ScrollToTop />
         <Routes>

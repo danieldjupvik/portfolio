@@ -39,6 +39,17 @@
   justify-content: center;
 }
 
+.project-card-wrapper {
+  border-radius: 16px;
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  &::before {
+    border-radius: 16px;
+  }
+}
+
 .project-card {
   position: relative;
   display: flex;

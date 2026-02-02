@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import { Mail, Linkedin, Github, ExternalLink, Sparkles, Clapperboard } from 'lucide-react';
+import { SpotlightCard } from './reactbits';
 import profilePicture from '../assets/img/profile-picture.jpeg';
 import bergenTekniske from '../assets/project-logo/BERGENS-TEKNISKE-MUSEUM.png';
 import holidaze from '../assets/project-logo/Holidaze-logo-white.png';
@@ -143,29 +144,34 @@ const Projects = () => {
                   : { href: project.url, target: '_blank', rel: 'noopener noreferrer' };
 
                 return (
-                  <ProjectWrapper
+                  <SpotlightCard
                     key={project.name}
-                    {...(linkProps as any)}
-                    className='project-card'
-                    style={{ '--index': index } as React.CSSProperties}
+                    className='project-card-wrapper'
+                    spotlightColor='rgba(116, 247, 217, 0.12)'
                   >
-                    <span className='project-card__number'>
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <div className='project-card__logo'>
-                      {project.icon === 'ai' ? (
-                        <Sparkles size={48} className='project-card__icon' />
-                      ) : project.icon === 'mcu' ? (
-                        <Clapperboard size={48} className='project-card__icon' />
-                      ) : (
-                        <img src={project.logo} alt={project.name} loading='lazy' />
-                      )}
-                    </div>
-                    <h3 className='project-card__name'>{project.name}</h3>
-                    <div className='project-card__arrow'>
-                      <ExternalLink size={18} />
-                    </div>
-                  </ProjectWrapper>
+                    <ProjectWrapper
+                      {...(linkProps as any)}
+                      className='project-card'
+                      style={{ '--index': index } as React.CSSProperties}
+                    >
+                      <span className='project-card__number'>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <div className='project-card__logo'>
+                        {project.icon === 'ai' ? (
+                          <Sparkles size={48} className='project-card__icon' />
+                        ) : project.icon === 'mcu' ? (
+                          <Clapperboard size={48} className='project-card__icon' />
+                        ) : (
+                          <img src={project.logo} alt={project.name} loading='lazy' />
+                        )}
+                      </div>
+                      <h3 className='project-card__name'>{project.name}</h3>
+                      <div className='project-card__arrow'>
+                        <ExternalLink size={18} />
+                      </div>
+                    </ProjectWrapper>
+                  </SpotlightCard>
                 );
               })}
             </div>
