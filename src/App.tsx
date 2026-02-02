@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
 import { HeroBackground } from './components/HeroBackground';
 import AI from './pages/AI';
@@ -25,6 +26,7 @@ function App() {
           />
         </Routes>
       </Router>
+      <Analytics />
     </div>
   );
 }
