@@ -162,10 +162,18 @@ export function Aurora({
       delete (geometry.attributes as { uv?: unknown }).uv;
     }
 
-    const colorStopsArray = colorStops.map(hex => {
-      const c = new Color(hex);
-      return [c.r, c.g, c.b];
-    });
+    const normalizeColorStops = (stops: string[]) => {
+      const normalized = [...stops];
+      while (normalized.length < 3) {
+        normalized.push(normalized[normalized.length - 1] || '#000000');
+      }
+      return normalized.slice(0, 3).map(hex => {
+        const c = new Color(hex);
+        return [c.r, c.g, c.b];
+      });
+    };
+
+    const colorStopsArray = normalizeColorStops(colorStops);
 
     program = new Program(gl, {
       vertex: VERT,
@@ -191,10 +199,7 @@ export function Aurora({
         program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
         program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
         const stops = propsRef.current.colorStops ?? colorStops;
-        program.uniforms.uColorStops.value = stops.map((hex: string) => {
-          const c = new Color(hex);
-          return [c.r, c.g, c.b];
-        });
+        program.uniforms.uColorStops.value = normalizeColorStops(stops);
         renderer.render({ scene: mesh });
       }
     };

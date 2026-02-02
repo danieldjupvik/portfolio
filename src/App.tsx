@@ -1,14 +1,14 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
-import { Cursor } from './components/Cursor';
-import { ScrollToTop } from './components/ScrollToTop';
-import { ClickSpark } from './components/reactbits';
-import AI from './pages/AI';
-import AIPrivacyPolicy from './pages/AIPrivacyPolicy';
-import AITermsOfServicePage from './pages/AITermsOfServicePage';
-import Home from './pages/Home';
-import MovieWatcht from './pages/MovieWatcht';
-import Privacy from './pages/Privacy';
+import { Cursor } from '@/components/Cursor';
+import { ScrollToTop } from '@/components/ScrollToTop';
+import { ClickSpark } from '@/components/reactbits';
+import AI from '@/pages/AI';
+import AIPrivacyPolicy from '@/pages/AIPrivacyPolicy';
+import AITermsOfServicePage from '@/pages/AITermsOfServicePage';
+import Home from '@/pages/Home';
+import MovieWatcht from '@/pages/MovieWatcht';
+import Privacy from '@/pages/Privacy';
 
 function App() {
   return (

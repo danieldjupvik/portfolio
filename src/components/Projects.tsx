@@ -203,12 +203,12 @@ const Projects = () => {
 
           <div className='about-content'>
             <p className='about-content__text'>
-              I'm a <span className='highlight'>{myAge}-year-old developer</span> from
+              I'm a <span className='about-content__highlight'>{myAge}-year-old developer</span> from
               Gursken, Sunnmøre, currently based in Ulsteinvik, Norway.
             </p>
             <p className='about-content__text'>
               With a background in Frontend Development from Noroff, I specialize in
-              building <span className='highlight'>modern web applications</span> that
+              building <span className='about-content__highlight'>modern web applications</span> that
               combine clean code with thoughtful user experiences.
             </p>
             <p className='about-content__text'>

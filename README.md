@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- HEADER -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1d1d1d,100:74f7d9&height=200&section=header&text=Daniel%20Djupvik&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Developer%20%E2%80%A2%20Creator%20%E2%80%A2%20Builder&descSize=20&descAlignY=55" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1d1d1d,100:74f7d9&height=200&section=header&text=Daniel%20Djupvik&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Developer%20%E2%80%A2%20Creator%20%E2%80%A2%20Builder&descSize=20&descAlignY=55" width="100%" alt="Header banner with name Daniel Djupvik" />
 
 <!-- BADGES -->
 <p>
@@ -27,7 +27,7 @@
 
 <!-- PREVIEW -->
 <a href="https://danieldjupvik.dev">
-<img src="./src//assets//img/preview.jpeg" alt="Portfolio Preview" width="700" />
+<img src="./src/assets/img/preview.jpeg" alt="Portfolio Preview" width="700" />
 </a>
 
 <sub>↑ Click to visit the live site</sub>
@@ -157,7 +157,7 @@
 
 ### Prerequisites
 
-```
+```text
 Node.js  ≥ 20.x
 npm      ≥ 10.x
 ```
@@ -206,7 +206,7 @@ eval "$(fnm env --use-on-cd)"
 
 ## 📁 Project Structure
 
-```
+```text
 portfolio/
 │
 ├── 📂 public/
@@ -335,6 +335,6 @@ $max-width: 768px;
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1d1d1d,100:74f7d9&height=100&section=footer" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1d1d1d,100:74f7d9&height=100&section=footer" width="100%" alt="Footer wave decoration" />
 
 </div>

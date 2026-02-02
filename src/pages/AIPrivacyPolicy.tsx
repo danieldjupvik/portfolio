@@ -18,7 +18,7 @@ const AIPrivacyPolicy = () => {
         </h1>
 
         <div className='subpage-text'>
-          <p><em>Last Updated: {new Date().toLocaleDateString()}</em></p>
+          <p><em>Last Updated: January 15, 2025</em></p>
 
           <h2>1. Introduction</h2>
           <p>

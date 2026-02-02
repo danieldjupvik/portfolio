@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/icon/portfolio-v2-logo.png';
+import logo from '@/assets/icon/portfolio-v2-logo.png';
 
 const Navigation = () => {
   const scrollToTop = () => {

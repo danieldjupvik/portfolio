@@ -19,7 +19,7 @@ const AITermsOfServicePage = () => {
         </h1>
 
         <div className='subpage-text'>
-          <p><em>Last Updated: {new Date().toLocaleDateString()}</em></p>
+          <p><em>Last Updated: January 15, 2025</em></p>
           <p>
             Please read these Terms of Service carefully before using the Daniel AI
             service. By using our service, you agree to be bound by these Terms.

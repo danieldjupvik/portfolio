@@ -233,7 +233,7 @@
     gap: 8px;
     z-index: 2;
     opacity: 0;
-    animation: fadeIn 0.6s $ease-out-expo forwards;
+    animation: heroFadeIn 0.6s $ease-out-expo forwards;
     animation-delay: 1.2s;
     background: none;
     border: none;
@@ -261,7 +261,7 @@
   }
 }
 
-@keyframes fadeIn {
+@keyframes heroFadeIn {
   to {
     opacity: 1;
   }
