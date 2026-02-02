@@ -10,6 +10,27 @@
   align-items: center;
   overflow: hidden;
 
+  // Grain overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Vignette effect
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
   &__canvas {
     position: absolute;
     inset: 0;
@@ -36,10 +57,11 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       color: $brand-color;
-      padding: 8px 16px;
+      padding: 8px 20px;
       border: 1px solid rgba(116, 247, 217, 0.3);
       border-radius: 100px;
       margin-bottom: $global-spacing * 2;
+      background: rgba(116, 247, 217, 0.05);
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s $ease-out-expo, transform 0.6s $ease-out-expo;
@@ -53,6 +75,7 @@
       color: white;
       line-height: 1.1;
       margin: 0 0 $global-spacing * 1.5;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
 
     &--line {
@@ -97,9 +120,10 @@
     &--tagline {
       font-family: $massText;
       font-size: 18px;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
       margin: 0;
+      letter-spacing: 0.3px;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s $ease-out-expo, transform 0.6s $ease-out-expo;
@@ -142,6 +166,8 @@
     letter-spacing: 1px;
     padding: 16px 32px;
     border-radius: 8px;
+    border: none;
+    cursor: pointer;
     transition: all $duration-normal $ease-out-expo;
     min-width: 180px;
 
@@ -152,27 +178,38 @@
     &--primary {
       background: $brand-color;
       color: $background-color;
+      box-shadow: 0 4px 20px rgba(116, 247, 217, 0.2);
 
       &:hover {
         background: white;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 40px rgba(116, 247, 217, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(116, 247, 217, 0.35);
 
         svg {
-          transform: translateX(4px);
+          transform: translateX(5px);
         }
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 25px rgba(116, 247, 217, 0.25);
       }
     }
 
     &--secondary {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
       color: $light-grey;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.12);
 
       &:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.12);
         border-color: rgba(255, 255, 255, 0.25);
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.08);
       }
     }
   }
@@ -190,6 +227,9 @@
     opacity: 0;
     animation: fadeIn 0.6s $ease-out-expo forwards;
     animation-delay: 1.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
 
     &--text {
       font-family: $heading;
@@ -202,7 +242,7 @@
 
     &--icon {
       color: $brand-color;
-      animation: bounce 2s infinite;
+      animation: bounce 2.5s ease-in-out infinite;
     }
 
     &:hover {
@@ -230,18 +270,11 @@
 }
 
 @keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
-  40% {
-    transform: translateY(6px);
-  }
-  60% {
-    transform: translateY(3px);
+  50% {
+    transform: translateY(8px);
   }
 }
 

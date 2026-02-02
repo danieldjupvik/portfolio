@@ -7,10 +7,10 @@
 
   a {
     color: $brand-color;
-    transition: opacity $duration-fast ease;
+    transition: color $duration-fast ease;
 
     &:hover {
-      opacity: 0.7;
+      color: white;
     }
   }
 }
@@ -27,8 +27,10 @@
   z-index: 100;
 
   &__logo {
+    transition: opacity 0.3s ease;
+
     img {
-      width: 40px;
+      width: 48px;
       height: auto;
     }
 
@@ -41,18 +43,28 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.7);
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 10px 18px;
+    border-radius: 8px;
     font-family: $heading;
     font-size: 13px;
+    letter-spacing: 0.5px;
     transition: all $duration-normal $ease-out-expo;
 
+    svg {
+      transition: transform $duration-normal $ease-out-expo;
+    }
+
     &:hover {
-      border-color: $brand-color;
-      color: $brand-color;
+      border-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      background: rgba(255, 255, 255, 0.06);
+
+      svg {
+        transform: translateX(-3px);
+      }
     }
   }
 }
@@ -61,6 +73,18 @@
   max-width: 800px;
   margin: 0 auto;
   padding: $global-spacing * 2 $global-spacing * 1.5 $global-spacing * 4;
+  animation: subpageFadeIn 0.6s $ease-out-expo;
+}
+
+@keyframes subpageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .subpage-title {
@@ -82,15 +106,15 @@
 .subpage-text {
   font-family: $massText;
   font-size: 16px;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.75);
 
   a {
     color: $brand-color;
-    transition: opacity $duration-fast ease;
+    transition: color $duration-fast ease;
 
     &:hover {
-      opacity: 0.7;
+      color: white;
     }
   }
 
@@ -98,15 +122,15 @@
   h3 {
     font-family: $heading;
     color: white;
-    margin: $global-spacing * 2 0 $global-spacing;
+    margin: $global-spacing * 2.5 0 $global-spacing;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
   p {
@@ -131,14 +155,20 @@
   margin-top: $global-spacing * 4;
 
   p {
-    font-family: $massText;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.4);
+    font-family: $heading;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.35);
     margin: 0;
   }
 
   a {
-    color: $brand-color;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color $duration-fast ease;
+
+    &:hover {
+      color: $brand-color;
+    }
   }
 }
 
@@ -174,13 +204,17 @@
   padding: 14px 28px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
   transition: all $duration-normal $ease-out-expo;
 
   &:hover {
     background: white;
     color: $background-color !important;
-    transform: translateY(-2px);
-    opacity: 1;
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
   }
 }
 
@@ -206,19 +240,28 @@
   display: flex;
   align-items: flex-start;
   gap: $global-spacing * 1.5;
+  padding: $global-spacing * 1.5;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: border-color $duration-normal $ease-out-expo;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 
   &__number {
     flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    background: $brand-color;
-    color: $background-color;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background: rgba(116, 247, 217, 0.15);
+    color: $brand-color;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: $heading;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: $bold;
   }
 
@@ -226,7 +269,7 @@
     font-family: $heading;
     font-size: 1rem;
     color: white;
-    margin: 0 0 4px;
+    margin: 0 0 6px;
   }
 
   p {
@@ -234,19 +277,20 @@
     font-size: 15px;
     color: rgba(255, 255, 255, 0.6);
     margin: 0;
+    line-height: 1.5;
   }
 }
 
 .ai-pricing {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  padding: $global-spacing * 2;
+  border-radius: 16px;
+  padding: $global-spacing * 2.5;
   text-align: center;
 
   h3 {
     font-family: $heading;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: white;
     margin: 0 0 $global-spacing * 0.5;
   }
@@ -254,8 +298,8 @@
   > p {
     font-family: $massText;
     font-size: 15px;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0 0 $global-spacing * 1.5;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 $global-spacing * 2;
   }
 }
 
@@ -264,28 +308,34 @@
   padding: 0;
   margin: 0;
   text-align: left;
-  max-width: 400px;
+  max-width: 320px;
   margin: 0 auto;
 
   li {
     font-family: $massText;
     font-size: 15px;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 8px 0;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 10px 0;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    &:last-child {
+      border-bottom: none;
+    }
 
     &::before {
       content: '✓';
       color: $brand-color;
       font-weight: bold;
+      font-size: 14px;
     }
   }
 }
 
 .ai-form {
-  max-width: 500px;
+  max-width: 450px;
   margin: 0 auto;
 
   &__field {
@@ -294,26 +344,32 @@
     label {
       display: block;
       font-family: $heading;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 8px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 10px;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
       color: white;
       font-family: $massText;
       font-size: 15px;
-      transition: border-color $duration-fast ease;
+      transition: border-color $duration-normal $ease-out-expo, background $duration-normal $ease-out-expo;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+      }
 
       &:focus {
         outline: none;
-        border-color: $brand-color;
+        border-color: rgba(116, 247, 217, 0.5);
+        background: rgba(255, 255, 255, 0.05);
       }
     }
 
@@ -345,11 +401,11 @@
 
 // MovieWatcht specific
 .moviewatcht-screenshot {
-  max-width: 280px;
+  max-width: 260px;
   margin: 0 auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  border-radius: 16px;
+  border-radius: 24px;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   img {
     display: block;
@@ -366,15 +422,17 @@
   flex-wrap: wrap;
 
   a {
-    transition: transform $duration-normal $ease-out-expo;
+    transition: transform $duration-normal $ease-out-expo, opacity $duration-normal ease;
+    opacity: 0.9;
 
     &:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
+      opacity: 1;
     }
   }
 
   img {
-    height: 50px;
+    height: 48px;
     width: auto;
   }
 }

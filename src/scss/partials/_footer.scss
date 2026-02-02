@@ -1,47 +1,23 @@
 @use '../variables' as *;
 
 .footer {
-  padding: $global-spacing * 2;
+  padding: $global-spacing * 3 $global-spacing * 1.5;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 
-  &__icons {
-    font-size: 30px;
-    color: $light-grey;
-    margin-bottom: $global-spacing * 2;
-    &--icon {
-      margin: 0 8px;
-    }
-  }
   &__copyright {
-    color: $light-grey;
-    font-size: 13px;
-    &--text {
-      margin: 0;
-    }
+    font-family: $heading;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0;
   }
-}
-#footer {
-  background-color: $navbar-color;
-  box-shadow: 0 0 25px 1px black;
 }
 
 @media only screen and (min-width: $max-width) {
   .footer {
-    padding: $global-spacing * 2;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 0;
-    padding-right: 0;
-
-    &__icons {
-      margin-bottom: 0;
-      &--icon:hover {
-        color: $brand-color;
-      }
-    }
+    padding: $global-spacing * 4 $global-spacing * 3;
   }
 }

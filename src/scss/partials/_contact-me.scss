@@ -8,9 +8,9 @@
 .contact-subtitle {
   font-family: $massText;
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   margin: 0 0 $global-spacing * 3;
-  font-style: italic;
+  letter-spacing: 0.3px;
 }
 
 .contact-links {
@@ -81,7 +81,7 @@
     padding: $global-spacing * 2;
 
     span {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 }

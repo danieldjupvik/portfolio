@@ -257,6 +257,13 @@ const Projects = () => {
           </a>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className='footer'>
+        <p className='footer__copyright'>
+          © {new Date().getFullYear()} Daniel Djupvik
+        </p>
+      </footer>
     </div>
   );
 };

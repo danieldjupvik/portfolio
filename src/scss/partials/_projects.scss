@@ -9,13 +9,26 @@
 
   &__title {
     font-family: $heading;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: $normal;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
-    margin: 0 0 $global-spacing * 1.5;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0 0 $global-spacing * 2;
     padding-left: 4px;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 24px;
+      height: 2px;
+      background: rgba(116, 247, 217, 0.4);
+      border-radius: 1px;
+    }
   }
 }
 
@@ -23,6 +36,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: $global-spacing * 1.5;
+  justify-content: center;
 }
 
 .project-card {
@@ -48,7 +62,7 @@
     background: linear-gradient(
       135deg,
       rgba(116, 247, 217, 0.08) 0%,
-      transparent 50%
+      transparent 60%
     );
     opacity: 0;
     transition: opacity $duration-normal $ease-out-expo;
@@ -155,8 +169,10 @@
   }
 
   .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: $global-spacing * 2;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .project-card {
@@ -170,11 +186,5 @@
     &__name {
       font-size: 16px;
     }
-  }
-}
-
-@media only screen and (min-width: $max-width-lg) {
-  .projects-grid {
-    grid-template-columns: repeat(4, 1fr);
   }
 }

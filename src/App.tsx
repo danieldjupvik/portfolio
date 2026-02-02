@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Cursor } from './components/Cursor';
+import { ScrollToTop } from './components/ScrollToTop';
 import AI from './pages/AI';
 import AIPrivacyPolicy from './pages/AIPrivacyPolicy';
 import AITermsOfServicePage from './pages/AITermsOfServicePage';
@@ -13,6 +14,7 @@ function App() {
     <div className='App'>
       <Cursor />
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/privacy' element={<Privacy />} />
